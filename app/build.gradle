@@ -17,13 +17,13 @@ idea {
 }
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion 28
+    buildToolsVersion '28.0.2'
 
     defaultConfig {
         applicationId "wolox.android.training"
         minSdkVersion 19
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0.0"
 
@@ -131,4 +131,5 @@ dependencies {
     testImplementation "org.mockito:mockito-inline:2.13.0"
     testImplementation "org.assertj:assertj-core:3.9.0"
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }
