@@ -7,11 +7,11 @@ import ar.com.wolox.android.example.ui.viewpager.ViewpagerActivity
 import ar.com.wolox.android.example.utils.onClickListener
 import ar.com.wolox.android.example.utils.onTextChanged
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
-import kotlinx.android.synthetic.main.fragment_example.*
+import kotlinx.android.synthetic.main.fragment_login.*
 
 class ExampleFragment : WolmoFragment<ExamplePresenter>(), IExampleView {
 
-    override fun layout(): Int = R.layout.fragment_example
+    override fun layout(): Int = R.layout.fragment_login
 
     override fun init() {
         vLoginButton.isEnabled = false
@@ -31,6 +31,9 @@ class ExampleFragment : WolmoFragment<ExamplePresenter>(), IExampleView {
                 saveUser()
                 presenter.storeUsername(vUsernameInput.text.toString())
             }
+        }
+        vSignUpButton.onClickListener {
+            onSignUp()
         }
     }
 
@@ -55,6 +58,11 @@ class ExampleFragment : WolmoFragment<ExamplePresenter>(), IExampleView {
     }
 
     override fun onUsernameSaved() {
+        val intent = Intent(activity, ViewpagerActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun onSignUp() {
         val intent = Intent(activity, ViewpagerActivity::class.java)
         startActivity(intent)
     }
