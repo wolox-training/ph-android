@@ -6,12 +6,17 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/vMessage"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vViewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_medium_more"
-        android:gravity="center"
-        android:text="@string/signup_textview"
-        android:textSize="@dimen/font_medium_extra" />
+        android:layout_height="wrap_content">
+
+        <android.support.v4.view.PagerTitleStrip
+            android:id="@+id/vTitleStrip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom" />
+
+    </android.support.v4.view.ViewPager>
+
 </LinearLayout>
