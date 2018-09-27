@@ -14,7 +14,11 @@
         android:theme="@style/AppTheme">
 
         <activity
+<<<<<<< HEAD
             android:name=".training.ui.root.RootActivity"
+=======
+            android:name=".training.ui.login.LoginActivity"
+>>>>>>> Se hizo un refactor general de la aplicacion y se asignaron funcionalidades a los botones LOG IN y SIGN UP
             android:screenOrientation="portrait">
 
             <intent-filter>
@@ -24,6 +28,7 @@
 
         </activity>
 
+<<<<<<< HEAD
         <activity
             android:name=".training.ui.login.LoginActivity"
             android:screenOrientation="portrait" />
@@ -36,6 +41,8 @@
             android:name=".training.ui.signup.SignupActivity"
             android:screenOrientation="portrait" />
 
+=======
+>>>>>>> Se hizo un refactor general de la aplicacion y se asignaron funcionalidades a los botones LOG IN y SIGN UP
     </application>
 
 </manifest>

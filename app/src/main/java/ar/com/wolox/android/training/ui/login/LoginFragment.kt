@@ -1,9 +1,7 @@
 package ar.com.wolox.android.training.ui.login
 
+import android.content.Context
 import android.content.Intent
-import android.text.method.LinkMovementMethod
-import android.view.View
-import android.widget.Toast
 import ar.com.wolox.android.R
 import ar.com.wolox.android.training.ui.home.HomeActivity
 import ar.com.wolox.android.training.ui.signup.SignupActivity
@@ -18,53 +16,55 @@ class LoginFragment : WolmoFragment<LoginPresenter>(), ILoginView {
 
     override fun init() {
         vLoginButton.isEnabled = false
-        vTermsConditions.movementMethod = LinkMovementMethod.getInstance()
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+
+        val vUserName = sharedPref.getString("Username", "")
+        if (vUserName != null && vUserName.isNotEmpty()) {
+            presenter.storeUsername(vUserName)
+        }
     }
 
     override fun setListeners() {
         vUsernameInput.onTextChanged { vLoginButton.isEnabled = it.isNotBlank() }
+        vPasswordInput.onTextChanged { vLoginButton.isEnabled = it.isNotBlank() }
         vLoginButton.onClickListener {
-            presenter.login(vUsernameInput.text.toString(), vPasswordInput.text.toString())
+            if (validateFields()) {
+                saveUser()
+                presenter.storeUsername(vUsernameInput.text.toString())
+            }
         }
         vSignUpButton.onClickListener {
-            presenter.signUp()
+            onSignUp()
         }
     }
 
-    override fun onJsonError() {
-        Toast.makeText(activity?.applicationContext, "Error reading JSON, can't connect to database", Toast.LENGTH_LONG).show()
+    private fun saveUser() {
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with(sharedPref.edit()) {
+            putString("Username", vUsernameInput.text.toString())
+            sharedPref
+            commit()
+        }
     }
 
-    override fun onLoginIncorrectUserError() {
-        Toast.makeText(activity?.applicationContext, "The user you've entered is incorrect.", Toast.LENGTH_LONG).show()
-    }
-
-    override fun onLoginFieldEmptyError() {
-        vUsernameInput.error = R.string.login_error_field_empty.toString()
-    }
-
-    override fun onLoginUserFormatInvalidError() {
-        vUsernameInput.error = R.string.login_error_user_format_invalid.toString()
+    private fun validateFields(): Boolean {
+        if (vUsernameInput.text.toString().isEmpty() || vPasswordInput.text.toString().isEmpty()) {
+            vUsernameInput.setError("Todos los campos son obligatorios.")
+            return false
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(vUsernameInput.text.toString()).matches()) {
+            vUsernameInput.setError("Formato invalido, un ejemplo válido es example@domain.com")
+            return false
+        }
+        return true
     }
 
     override fun onUsernameSaved() {
         val intent = Intent(activity, HomeActivity::class.java)
-
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
 
-    override fun progressCircleVisibilityOn() {
-        vProgressCircle.visibility = View.VISIBLE
-    }
-
-    override fun progressCircleVisibilityOff() {
-        vProgressCircle.visibility = View.GONE
-    }
-
-    override fun onSignUp() {
+    fun onSignUp() {
         val intent = Intent(activity, SignupActivity::class.java)
-
         startActivity(intent)
     }
 }

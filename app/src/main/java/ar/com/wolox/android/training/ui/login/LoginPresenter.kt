@@ -1,5 +1,6 @@
 package ar.com.wolox.android.training.ui.login
 
+<<<<<<< HEAD
 import android.content.SharedPreferences
 import android.util.Patterns
 import ar.com.wolox.android.training.model.IUserService
@@ -61,5 +62,16 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
             putString(userEmailKey, userEmail)
             apply()
         }
+=======
+import ar.com.wolox.android.training.utils.UserSession
+import ar.com.wolox.wolmo.core.presenter.BasePresenter
+import javax.inject.Inject
+
+class LoginPresenter @Inject constructor(private val mUserSession: UserSession) : BasePresenter<ILoginView>(){
+
+    fun storeUsername(text: String) {
+        mUserSession.username = text
+        view.onUsernameSaved()
+>>>>>>> Se hizo un refactor general de la aplicacion y se asignaron funcionalidades a los botones LOG IN y SIGN UP
     }
 }
