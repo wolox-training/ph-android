@@ -29,10 +29,13 @@
         </activity>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         <activity
             android:name=".training.ui.login.LoginActivity"
             android:screenOrientation="portrait" />
 
+=======
+>>>>>>> Page navigation functionality has been fixed and set. Minor bugs fixed. Minor refactorings made.
         <activity
             android:name=".training.ui.home.HomeActivity"
             android:screenOrientation="portrait" />
@@ -41,8 +44,11 @@
             android:name=".training.ui.signup.SignupActivity"
             android:screenOrientation="portrait" />
 
+<<<<<<< HEAD
 =======
 >>>>>>> Se hizo un refactor general de la aplicacion y se asignaron funcionalidades a los botones LOG IN y SIGN UP
+=======
+>>>>>>> Page navigation functionality has been fixed and set. Minor bugs fixed. Minor refactorings made.
     </application>
 
 </manifest>

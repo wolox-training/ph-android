@@ -8,20 +8,22 @@ import ar.com.wolox.android.training.ui.signup.SignupActivity
 import ar.com.wolox.android.training.utils.onClickListener
 import ar.com.wolox.android.training.utils.onTextChanged
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
+import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import kotlinx.android.synthetic.main.fragment_login.*
 
-class LoginFragment : WolmoFragment<LoginPresenter>(), ILoginView {
+class LoginFragment : WolmoFragment<BasePresenter<Any>>() {
 
     override fun layout(): Int = R.layout.fragment_login
 
     override fun init() {
-        vLoginButton.isEnabled = false
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
 
         val vUserName = sharedPref.getString("Username", "")
         if (vUserName != null && vUserName.isNotEmpty()) {
-            presenter.storeUsername(vUserName)
+            onUsernameSaved()
         }
+
+        vLoginButton.isEnabled = false
     }
 
     override fun setListeners() {
@@ -30,7 +32,7 @@ class LoginFragment : WolmoFragment<LoginPresenter>(), ILoginView {
         vLoginButton.onClickListener {
             if (validateFields()) {
                 saveUser()
-                presenter.storeUsername(vUsernameInput.text.toString())
+                onUsernameSaved()
             }
         }
         vSignUpButton.onClickListener {
@@ -42,7 +44,6 @@ class LoginFragment : WolmoFragment<LoginPresenter>(), ILoginView {
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
         with(sharedPref.edit()) {
             putString("Username", vUsernameInput.text.toString())
-            sharedPref
             commit()
         }
     }
@@ -58,7 +59,7 @@ class LoginFragment : WolmoFragment<LoginPresenter>(), ILoginView {
         return true
     }
 
-    override fun onUsernameSaved() {
+    fun onUsernameSaved() {
         val intent = Intent(activity, HomeActivity::class.java)
         startActivity(intent)
     }
