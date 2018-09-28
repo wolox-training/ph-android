@@ -1,19 +1,12 @@
 <resources>
 
     <!-- General -->
-    <string name="example_title">ExampleFragment</string>
-    <string name="terms_and_conditions">By joining you agree to our Terms &amp; Conditions</string>
-    <string name="example_textview">Press the button to generate a random number</string>
-    <string name="example_randomize">Randomize</string>
-    <string name="example_wolox">WOLOX</string>
-    <string name="example_message">The presenter generated the number %1$d and this view is displaying it</string>
-    <string name="page_1_title">Username: %1$s</string>
-    <string name="page_1_toolbar_title">Random number example</string>
-    <string name="page_2_title">Page 2</string>
-    <string name="page_2_toolbar_title">Example Request</string>
-    <string name="fragment_example_username">Username</string>
-    <string name="fragment_example_password">Password</string>
-    <string name="fragment_example_login">Log In</string>
-    <string name="fragment_example_signup">Sign Up</string>
+    <string name="terms_and_conditions">By joining you agree to our <a href="www.google.com">Terms &amp; Conditions</a></string>
+    <string name="home_textview">This is the Home Screen</string>
+    <string name="signup_textview">This is the Sign Up Screen</string>
+    <string name="fragment_login_username">Username</string>
+    <string name="fragment_login_password">Password</string>
+    <string name="fragment_login_login">Log In</string>
+    <string name="fragment_login_signup">Sign Up</string>
 
 </resources>
