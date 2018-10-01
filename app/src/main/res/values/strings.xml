@@ -6,7 +6,6 @@
     <string name="root_textview">Loading...</string>
     <string name="home_textview_news">This is the News Screen</string>
     <string name="home_textview_profile">This is the Profile Screen</string>
-    <string name="home_textview">This is the Home Screen</string>
     <string name="signup_textview">This is the Sign Up Screen</string>
     <string name="fragment_login_username">Username</string>
     <string name="fragment_login_password">Password</string>

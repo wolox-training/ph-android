@@ -5,7 +5,6 @@ import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.Toast
 import ar.com.wolox.android.R
-import ar.com.wolox.android.R.id.vTermsConditions
 import ar.com.wolox.android.training.ui.home.HomeActivity
 import ar.com.wolox.android.training.ui.signup.SignupActivity
 import ar.com.wolox.android.training.utils.onClickListener
