@@ -2,6 +2,7 @@ package ar.com.wolox.android.training.ui.login
 
 import android.content.Context
 import android.content.Intent
+import android.text.method.LinkMovementMethod
 import ar.com.wolox.android.R
 import ar.com.wolox.android.training.ui.home.HomeActivity
 import ar.com.wolox.android.training.ui.signup.SignupActivity
@@ -24,6 +25,10 @@ class LoginFragment : WolmoFragment<BasePresenter<Any>>() {
         }
 
         vLoginButton.isEnabled = false
+
+        vTermsConditions.setText(R.string.terms_and_conditions)
+        vTermsConditions.isClickable = true
+        vTermsConditions.movementMethod = LinkMovementMethod.getInstance()
     }
 
     override fun setListeners() {
