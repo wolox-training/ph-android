@@ -2,8 +2,11 @@ package ar.com.wolox.android.training.ui.login
 
 import android.content.Context
 import android.content.Intent
-import android.text.method.LinkMovementMethod
+import android.widget.Toast
 import ar.com.wolox.android.R
+import ar.com.wolox.android.training.model.IGetUserService
+import ar.com.wolox.android.training.model.RetrofitClientInstance
+import ar.com.wolox.android.training.model.User
 import ar.com.wolox.android.training.ui.home.HomeActivity
 import ar.com.wolox.android.training.ui.signup.SignupActivity
 import ar.com.wolox.android.training.utils.onClickListener
@@ -11,6 +14,9 @@ import ar.com.wolox.android.training.utils.onTextChanged
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import kotlinx.android.synthetic.main.fragment_login.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginFragment : WolmoFragment<BasePresenter<Any>>() {
 
@@ -18,26 +24,27 @@ class LoginFragment : WolmoFragment<BasePresenter<Any>>() {
 
     override fun init() {
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-
         val vUserName = sharedPref.getString("Username", "")
-        if (vUserName != null && vUserName.isNotEmpty()) {
+        if (vUserName != null && vUserName.isNotEmpty() && validateUser(vUserName)) {
             onUsernameSaved()
         }
 
         vLoginButton.isEnabled = false
-
         vTermsConditions.setText(R.string.terms_and_conditions)
         vTermsConditions.isClickable = true
-        vTermsConditions.movementMethod = LinkMovementMethod.getInstance()
     }
 
     override fun setListeners() {
         vUsernameInput.onTextChanged { vLoginButton.isEnabled = it.isNotBlank() }
         vPasswordInput.onTextChanged { vLoginButton.isEnabled = it.isNotBlank() }
         vLoginButton.onClickListener {
-            if (validateFields()) {
-                saveUser()
-                onUsernameSaved()
+            if (validateFields()){
+                if(!validateUser(vUsernameInput.text.toString())){
+                    vUsernameInput.setError("The user you entered does not exist.")
+                } else {
+                    saveUser()
+                    onUsernameSaved()
+                }
             }
         }
         vSignUpButton.onClickListener {
@@ -45,32 +52,62 @@ class LoginFragment : WolmoFragment<BasePresenter<Any>>() {
         }
     }
 
-    private fun saveUser() {
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        with(sharedPref.edit()) {
-            putString("Username", vUsernameInput.text.toString())
-            commit()
-        }
+    private fun validateUser(user: String): Boolean {
+        val service = RetrofitClientInstance.retrofitInstance?.create(IGetUserService::class.java)
+        val call = service?.getAllUsers()
+        var validUser = false
+
+        call?.enqueue(object : Callback<Array<User>> {
+            override fun onFailure(call: Call<Array<User>>, t: Throwable) {
+                Toast.makeText(activity?.applicationContext, "Error reading JSON, can't connect to database", Toast.LENGTH_LONG).show()
+            }
+            override fun onResponse(call: Call<Array<User>>, response: Response<Array<User>>) {
+                val body = response.body()
+                val iterator = body?.iterator()
+                iterator?.forEach {
+                    if (it.email == user) {
+                        validUser = true
+                        return
+                    }
+                }
+            }
+        })
+        return validUser
     }
 
     private fun validateFields(): Boolean {
+        var validFields = true
+
         if (vUsernameInput.text.toString().isEmpty() || vPasswordInput.text.toString().isEmpty()) {
-            vUsernameInput.setError("Todos los campos son obligatorios.")
-            return false
-        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(vUsernameInput.text.toString()).matches()) {
-            vUsernameInput.setError("Formato invalido, un ejemplo válido es example@domain.com")
-            return false
+            vUsernameInput.setError("All fields are mandatory.")
+            validFields = false
+        } else {
+            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(vUsernameInput.text.toString()).matches()) {
+                vUsernameInput.setError("Invalid format, the correct format is example@domain.com")
+                validFields = false
+            }
         }
-        return true
+        return validFields
     }
 
-    fun onUsernameSaved() {
+    private fun saveUser() {
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+
+        with(sharedPref.edit()) {
+            putString("Username", vUsernameInput.text.toString())
+            apply()
+        }
+    }
+
+    private fun onUsernameSaved() {
         val intent = Intent(activity, HomeActivity::class.java)
+
         startActivity(intent)
     }
 
-    fun onSignUp() {
+    private fun onSignUp() {
         val intent = Intent(activity, SignupActivity::class.java)
+
         startActivity(intent)
     }
 }
