@@ -25,8 +25,8 @@ class LoginFragment : WolmoFragment<BasePresenter<Any>>() {
     override fun init() {
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
         val vUserName = sharedPref.getString("Username", "")
-        if (vUserName != null && vUserName.isNotEmpty() && validateUser(vUserName)) {
-            onUsernameSaved()
+        if (vUserName != null && vUserName.isNotEmpty()) {
+            validateUser(vUserName)
         }
 
         vLoginButton.isEnabled = false
@@ -39,12 +39,7 @@ class LoginFragment : WolmoFragment<BasePresenter<Any>>() {
         vPasswordInput.onTextChanged { vLoginButton.isEnabled = it.isNotBlank() }
         vLoginButton.onClickListener {
             if (validateFields()){
-                if(!validateUser(vUsernameInput.text.toString())){
-                    vUsernameInput.setError("The user you entered does not exist.")
-                } else {
-                    saveUser()
-                    onUsernameSaved()
-                }
+                validateUser(vUsernameInput.text.toString())
             }
         }
         vSignUpButton.onClickListener {
@@ -52,12 +47,11 @@ class LoginFragment : WolmoFragment<BasePresenter<Any>>() {
         }
     }
 
-    private fun validateUser(user: String): Boolean {
+    private fun validateUser(user: String){
         val service = RetrofitClientInstance.retrofitInstance?.create(IGetUserService::class.java)
         val call = service?.getAllUsers()
-        var validUser = false
 
-        call?.enqueue(object : Callback<Array<User>> {
+        /*call?.enqueue(object : Callback<Array<User>> {
             override fun onFailure(call: Call<Array<User>>, t: Throwable) {
                 Toast.makeText(activity?.applicationContext, "Error reading JSON, can't connect to database", Toast.LENGTH_LONG).show()
             }
@@ -66,13 +60,13 @@ class LoginFragment : WolmoFragment<BasePresenter<Any>>() {
                 val iterator = body?.iterator()
                 iterator?.forEach {
                     if (it.email == user) {
-                        validUser = true
-                        return
+                        saveUser()
+                        onUsernameSaved()
                     }
                 }
+                vUsernameInput.setError("The user you entered does not exist.")
             }
-        })
-        return validUser
+        })*/
     }
 
     private fun validateFields(): Boolean {
