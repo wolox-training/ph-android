@@ -6,12 +6,17 @@ import javax.inject.Inject
 
 class RootPresenter @Inject constructor(private val sharedPreferences: SharedPreferences) : BasePresenter<IRootView>() {
 
+<<<<<<< HEAD
     companion object UserEmailKey {
         private const val userEmailKey = "UserEmail"
     }
 
     fun loadUserPreferences() {
         val vUserEmail = sharedPreferences.getString(userEmailKey, "")
+=======
+    fun loadUserPreferences() {
+        val vUserEmail = sharedPreferences.getString("UserEmail", "")
+>>>>>>> Automatic login now administered by a new RootActivity. Minor refactoring.
         if (vUserEmail != null && vUserEmail.isNotEmpty()) {
             view.onSessionLoggedIn()
         } else {

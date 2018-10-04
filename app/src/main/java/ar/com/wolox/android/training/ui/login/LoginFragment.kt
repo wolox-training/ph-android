@@ -1,6 +1,7 @@
 package ar.com.wolox.android.training.ui.login
 
 import android.content.Intent
+import android.text.method.LinkMovementMethod
 import android.widget.Toast
 import ar.com.wolox.android.R
 import ar.com.wolox.android.training.ui.home.HomeActivity
@@ -15,11 +16,8 @@ class LoginFragment : WolmoFragment<LoginPresenter>(), ILoginView {
     override fun layout(): Int = R.layout.fragment_login
 
     override fun init() {
-        presenter.loadUserPreferences()
-
         vLoginButton.isEnabled = false
-        vTermsConditions.setText(R.string.terms_and_conditions)
-        vTermsConditions.isClickable = true
+        vTermsConditions.movementMethod = LinkMovementMethod.getInstance()
     }
 
     override fun setListeners() {
@@ -51,6 +49,7 @@ class LoginFragment : WolmoFragment<LoginPresenter>(), ILoginView {
     override fun onUsernameSaved() {
         val intent = Intent(activity, HomeActivity::class.java)
 
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
 

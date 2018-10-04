@@ -5,12 +5,15 @@
 <<<<<<< HEAD
     <string name="terms_and_conditions">By joining you agree to our <a href="https://www.google.com">Terms &amp; Conditions</a></string>
     <string name="root_textview">Loading...</string>
+<<<<<<< HEAD
 =======
     <string name="terms_and_conditions">By joining you agree to our <a href="www.google.com">Terms &amp; Conditions</a></string>
 >>>>>>> Page navigation functionality has been fixed and set. Minor bugs fixed. Minor refactorings made.
 =======
     <string name="terms_and_conditions">By joining you agree to our <a href="https://www.google.com">Terms &amp; Conditions</a></string>
 >>>>>>> Functional link was added to the login screen. Minor refactoring changes.
+=======
+>>>>>>> Automatic login now administered by a new RootActivity. Minor refactoring.
     <string name="home_textview">This is the Home Screen</string>
     <string name="signup_textview">This is the Sign Up Screen</string>
     <string name="fragment_login_username">Username</string>

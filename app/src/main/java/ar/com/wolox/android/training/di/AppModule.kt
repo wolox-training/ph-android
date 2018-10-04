@@ -29,12 +29,16 @@ abstract class AppModule {
     @ContributesAndroidInjector
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Automatic login now administered by a new RootActivity. Minor refactoring.
     internal abstract fun rootActivity(): RootActivity
 
     @ContributesAndroidInjector
     internal abstract fun rootFragment(): RootFragment
 
     @ContributesAndroidInjector
+<<<<<<< HEAD
     internal abstract fun loginActivity(): LoginActivity
 
     @ContributesAndroidInjector
@@ -58,6 +62,8 @@ abstract class AppModule {
     internal abstract fun loginFragment(): LoginFragment
 >>>>>>> Se hizo un refactor general de la aplicacion y se asignaron funcionalidades a los botones LOG IN y SIGN UP
 =======
+=======
+>>>>>>> Automatic login now administered by a new RootActivity. Minor refactoring.
     internal abstract fun loginActivity(): LoginActivity
 
     @ContributesAndroidInjector

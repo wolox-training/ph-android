@@ -94,6 +94,7 @@
         android:layout_marginStart="@dimen/static_spacing_medium_extra"
         android:gravity="center|center_horizontal"
         android:textSize="@dimen/font_medium"
+        android:text="@string/terms_and_conditions"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

@@ -39,6 +39,7 @@ import javax.inject.Inject
 
 class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPreferences) : BasePresenter<ILoginView>() {
 
+<<<<<<< HEAD
     fun loadUserPreferences() {
         val vUserEmail = sharedPreferences.getString("UserEmail", "")
         if (vUserEmail != null && vUserEmail.isNotEmpty()) {
@@ -52,6 +53,8 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
             validateUserEmail(vUsernameInput.text.toString())
 >>>>>>> Finished connection to JSON.
 =======
+=======
+>>>>>>> Automatic login now administered by a new RootActivity. Minor refactoring.
     fun login(userEmail: String, userPassword: String) {
         if (validateFields(userEmail, userPassword)) {
             validateUserEmail(userEmail)
