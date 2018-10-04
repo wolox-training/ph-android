@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".training.ui.login.LoginActivity"
+            android:name=".training.ui.root.RootActivity"
             android:screenOrientation="portrait">
 
             <intent-filter>
@@ -23,6 +23,10 @@
             </intent-filter>
 
         </activity>
+
+        <activity
+            android:name=".training.ui.login.LoginActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".training.ui.home.HomeActivity"
