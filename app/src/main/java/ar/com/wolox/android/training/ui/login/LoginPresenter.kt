@@ -2,6 +2,7 @@ package ar.com.wolox.android.training.ui.login
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import android.content.SharedPreferences
 import android.util.Patterns
 import ar.com.wolox.android.training.model.IUserService
@@ -23,9 +24,10 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
             validateUserEmail(userEmail)
 =======
 import android.content.Context
+=======
+>>>>>>> Refactoring finished.
 import android.content.SharedPreferences
-import ar.com.wolox.android.R.id.vPasswordInput
-import ar.com.wolox.android.R.id.vUsernameInput
+import android.util.Patterns
 import ar.com.wolox.android.training.model.IGetUserService
 import ar.com.wolox.android.training.model.RetrofitClientInstance
 import ar.com.wolox.android.training.model.User
@@ -35,19 +37,25 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPreferences): BasePresenter<ILoginView>() {
+class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPreferences) : BasePresenter<ILoginView>() {
 
     fun loadUserPreferences() {
-        val vUserEmail = sharedPreferences?.getString("UserEmail", "")
+        val vUserEmail = sharedPreferences.getString("UserEmail", "")
         if (vUserEmail != null && vUserEmail.isNotEmpty()) {
             validateUserEmail(vUserEmail)
         }
     }
 
+<<<<<<< HEAD
     fun login() {
         if (validateFields()){
             validateUserEmail(vUsernameInput.text.toString())
 >>>>>>> Finished connection to JSON.
+=======
+    fun login(userEmail: String, userPassword: String) {
+        if (validateFields(userEmail, userPassword)) {
+            validateUserEmail(userEmail)
+>>>>>>> Refactoring finished.
         }
     }
 
@@ -110,9 +118,10 @@ class LoginPresenter @Inject constructor(private val mUserSession: UserSession) 
             override fun onFailure(call: Call<Array<User>>, t: Throwable) {
                 view.onJsonError()
             }
+
             override fun onResponse(call: Call<Array<User>>, response: Response<Array<User>>) {
-                if (response.body()?.get(0) != null) {
-                    saveUser()
+                if (response.body()?.any() == true) {
+                    saveUser(userEmail)
                     view.onUsernameSaved()
                 } else {
                     view.onLoginUserNonExistentError()
@@ -121,22 +130,22 @@ class LoginPresenter @Inject constructor(private val mUserSession: UserSession) 
         })
     }
 
-    private fun validateFields(): Boolean {
+    private fun validateFields(userEmail: String, userPassword: String): Boolean {
         var validFields = true
 
-        if (vUsernameInput.text.toString().isEmpty() || vPasswordInput.text.toString().isEmpty()) {
+        if (userEmail.isEmpty() || userPassword.isEmpty()) {
             view.onLoginFieldEmptyError()
             validFields = false
-        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(vUsernameInput.text.toString()).matches()) {
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
             view.onLoginUserFormatInvalidError()
             validFields = false
         }
         return validFields
     }
 
-    private fun saveUser() {
+    private fun saveUser(userEmail: String) {
         with(sharedPreferences.edit()) {
-            putString("UserEmail", vUsernameInput.text.toString())
+            putString("UserEmail", userEmail)
             apply()
         }
 >>>>>>> Finished connection to JSON.
