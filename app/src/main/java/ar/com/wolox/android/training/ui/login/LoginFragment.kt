@@ -16,11 +16,6 @@ class LoginFragment : WolmoFragment<LoginPresenter>(), ILoginView {
 
     override fun init() {
         presenter.loadUserPreferences()
-        /*val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        val vUserName = sharedPref.getString("Username", "")
-        if (vUserName != null && vUserName.isNotEmpty()) {
-            validateUserEmail(vUserName)
-        }*/
 
         vLoginButton.isEnabled = false
         vTermsConditions.setText(R.string.terms_and_conditions)
@@ -30,73 +25,27 @@ class LoginFragment : WolmoFragment<LoginPresenter>(), ILoginView {
     override fun setListeners() {
         vUsernameInput.onTextChanged { vLoginButton.isEnabled = it.isNotBlank() }
         vLoginButton.onClickListener {
-            presenter.login()
-            /*if (validateFields()){
-                validateUserEmail(vUsernameInput.text.toString())
-            }*/
+            presenter.login(vUsernameInput.text.toString(), vPasswordInput.text.toString())
         }
         vSignUpButton.onClickListener {
             presenter.signUp()
         }
     }
 
-    /*private fun validateUserEmail(userEmail: String){
-        val service = RetrofitClientInstance.retrofitInstance?.create(IGetUserService::class.java)
-        val call = service?.getUserByEmail(userEmail)
-
-        call?.enqueue(object : Callback<Array<User>> {
-            override fun onFailure(call: Call<Array<User>>, t: Throwable) {
-                Toast.makeText(activity?.applicationContext, "Error reading JSON, can't connect to database", Toast.LENGTH_LONG).show()
-            }
-            override fun onResponse(call: Call<Array<User>>, response: Response<Array<User>>) {
-                if (response.body()?.get(0) != null) {
-                    saveUser()
-                    onUsernameSaved()
-                } else {
-                    vUsernameInput.setError("The user you entered does not exist.")
-                }
-            }
-        })
-    }*/
-
-    /*private fun validateFields(): Boolean {
-        var validFields = true
-
-        if (vUsernameInput.text.toString().isEmpty() || vPasswordInput.text.toString().isEmpty()) {
-            vUsernameInput.setError("All fields are mandatory.")
-            validFields = false
-        } else {
-            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(vUsernameInput.text.toString()).matches()) {
-                vUsernameInput.setError("Invalid format, the correct format is example@domain.com")
-                validFields = false
-            }
-        }
-        return validFields
-    }*/
-
-    /*private fun saveUser() {
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-
-        with(sharedPref.edit()) {
-            putString("UserEmail", vUsernameInput.text.toString())
-            apply()
-        }
-    }*/
-
-    override fun onJsonError(){
+    override fun onJsonError() {
         Toast.makeText(activity?.applicationContext, "Error reading JSON, can't connect to database", Toast.LENGTH_LONG).show()
     }
 
     override fun onLoginUserNonExistentError() {
-        vUsernameInput.setError("The user you entered does not exist.")
+        vUsernameInput.error = "The user you entered does not exist."
     }
 
-    override fun onLoginFieldEmptyError(){
-        R.id.vUsernameInput.setError("All fields are mandatory.")
+    override fun onLoginFieldEmptyError() {
+        vUsernameInput.error = "All fields are mandatory."
     }
 
-    override fun onLoginUserFormatInvalidError(){
-        R.id.vUsernameInput.setError("Invalid format, the correct format is example@domain.com")
+    override fun onLoginUserFormatInvalidError() {
+        vUsernameInput.error = "Invalid format, the correct format is example@domain.com"
     }
 
     override fun onUsernameSaved() {
