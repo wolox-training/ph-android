@@ -2,6 +2,7 @@ package ar.com.wolox.android.training.ui.login
 
 import android.content.Intent
 import android.text.method.LinkMovementMethod
+import android.view.View
 import android.widget.Toast
 import ar.com.wolox.android.R
 import ar.com.wolox.android.training.ui.home.HomeActivity
@@ -34,8 +35,13 @@ class LoginFragment : WolmoFragment<LoginPresenter>(), ILoginView {
         Toast.makeText(activity?.applicationContext, "Error reading JSON, can't connect to database", Toast.LENGTH_LONG).show()
     }
 
+<<<<<<< HEAD
     override fun onLoginUserNonExistentError() {
         vUsernameInput.error = R.string.login_error_user_non_existent.toString()
+=======
+    override fun onLoginIncorrectUserError() {
+        Toast.makeText(activity?.applicationContext, "The user you've entered is incorrect.", Toast.LENGTH_LONG).show()
+>>>>>>> Created Toast messages to manage REST connection status. Created progress spinner in Login screen for connection attempt.
     }
 
     override fun onLoginFieldEmptyError() {
@@ -51,6 +57,14 @@ class LoginFragment : WolmoFragment<LoginPresenter>(), ILoginView {
 
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
+    }
+
+    override fun progressCircleVisibilityOn() {
+        vProgressCircle.visibility = View.VISIBLE
+    }
+
+    override fun progressCircleVisibilityOff() {
+        vProgressCircle.visibility = View.GONE
     }
 
     override fun onSignUp() {

@@ -29,13 +29,31 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
     private fun validateUserEmail(userEmail: String) {
         val service = vRetrofitServices.getService(IUserService::class.java)
         val call = service?.getUserByEmail(userEmail)
+<<<<<<< HEAD
 
         call?.enqueue(networkCallback {
             onResponseSuccessful {
                 runIfViewAttached { view ->
                     saveUser(userEmail)
                     view.onUsernameSaved()
+=======
+        
+        view.progressCircleVisibilityOn()
+        call?.enqueue(object : Callback<Array<User>> {
+            override fun onFailure(call: Call<Array<User>>, t: Throwable) {
+                view.onJsonError()
+                view.progressCircleVisibilityOff()
+            }
+
+            override fun onResponse(call: Call<Array<User>>, response: Response<Array<User>>) {
+                if (response.body()?.any() == true) {
+                    saveUser(userEmail)
+                    view.onUsernameSaved()
+                } else {
+                    view.onLoginIncorrectUserError()
+>>>>>>> Created Toast messages to manage REST connection status. Created progress spinner in Login screen for connection attempt.
                 }
+                view.progressCircleVisibilityOff()
             }
 
             onResponseFailed { _, _ -> runIfViewAttached(Runnable { view.onJsonError() }) }
