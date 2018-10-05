@@ -2,6 +2,7 @@
 
     <!-- General -->
     <string name="example_title">ExampleFragment</string>
+    <string name="terms_and_conditions">By joining you agree to our Terms &amp; Conditions</string>
     <string name="example_textview">Press the button to generate a random number</string>
     <string name="example_randomize">Randomize</string>
     <string name="example_wolox">WOLOX</string>
@@ -11,6 +12,8 @@
     <string name="page_2_title">Page 2</string>
     <string name="page_2_toolbar_title">Example Request</string>
     <string name="fragment_example_username">Username</string>
-    <string name="fragment_example_login">Login</string>
+    <string name="fragment_example_password">Password</string>
+    <string name="fragment_example_login">Log In</string>
+    <string name="fragment_example_signup">Sign Up</string>
 
 </resources>
