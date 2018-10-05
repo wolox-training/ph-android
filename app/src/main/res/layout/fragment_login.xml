@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/vWoloxLogo"
+        android:layout_width="@dimen/spacing_none"
+        android:layout_height="@dimen/static_spacing_large_image"
+        android:layout_marginBottom="@dimen/static_spacing_large_less"
+        android:layout_marginEnd="@dimen/static_spacing_medium_extra"
+        android:layout_marginStart="@dimen/static_spacing_medium_extra"
+        android:layout_marginTop="@dimen/static_spacing_large_less"
+        android:background="@drawable/bg_home_wolox_logo"
+        android:gravity="center|center_horizontal"
+        android:textSize="@dimen/font_medium_extra"
+        app:layout_constraintBottom_toTopOf="@+id/vUsernameInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
+
+    <EditText
+        android:id="@+id/vUsernameInput"
+        android:layout_width="@dimen/spacing_none"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/static_spacing_medium_extra"
+        android:layout_marginStart="@dimen/static_spacing_medium_extra"
+        android:gravity="start"
+        android:hint="@string/fragment_login_username"
+        android:singleLine="true"
+        app:layout_constraintBottom_toTopOf="@+id/vPasswordInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vWoloxLogo" />
+
+    <EditText
+        android:id="@+id/vPasswordInput"
+        android:layout_width="@dimen/spacing_none"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/static_spacing_large_less"
+        android:layout_marginEnd="@dimen/static_spacing_medium_extra"
+        android:layout_marginStart="@dimen/static_spacing_medium_extra"
+        android:gravity="start"
+        android:hint="@string/fragment_login_password"
+        android:singleLine="true"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/vLoginButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vUsernameInput" />
+
+    <Button
+        android:id="@+id/vLoginButton"
+        android:layout_width="@dimen/spacing_none"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/static_spacing_medium_extra"
+        android:layout_marginStart="@dimen/static_spacing_medium_extra"
+        android:text="@string/fragment_login_login"
+        app:layout_constraintBottom_toTopOf="@+id/vSignUpButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vPasswordInput" />
+
+    <Button
+        android:id="@+id/vSignUpButton"
+        android:layout_width="@dimen/spacing_none"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/static_spacing_large_less"
+        android:layout_marginEnd="@dimen/static_spacing_medium_extra"
+        android:layout_marginStart="@dimen/static_spacing_medium_extra"
+        android:backgroundTint="@color/chuck_status_300"
+        android:text="@string/fragment_login_signup"
+        android:textColor="@color/chuck_status_requested"
+        app:layout_constraintBottom_toTopOf="@+id/vTermsConditions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vLoginButton" />
+
+    <TextView
+        android:id="@+id/vTermsConditions"
+        android:layout_width="@dimen/spacing_none"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/static_spacing_large_less"
+        android:layout_marginEnd="@dimen/static_spacing_medium_extra"
+        android:layout_marginStart="@dimen/static_spacing_medium_extra"
+        android:gravity="center|center_horizontal"
+        android:textSize="@dimen/font_medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vSignUpButton" />
+
+</android.support.constraint.ConstraintLayout>
