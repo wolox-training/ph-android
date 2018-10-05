@@ -36,7 +36,7 @@ class LoginFragment : WolmoFragment<LoginPresenter>(), ILoginView {
     }
 
     override fun onLoginIncorrectUserError() {
-        Toast.makeText(activity?.applicationContext, "The user you've entered is incorrect.", Toast.LENGTH_LONG).show()
+        vUsernameInput.error = R.string.login_error_user_non_existent.toString()
     }
 
     override fun onLoginFieldEmptyError() {
