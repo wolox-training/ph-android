@@ -116,10 +116,12 @@ class LoginPresenter @Inject constructor(private val mUserSession: UserSession) 
 =======
         val service = RetrofitClientInstance.retrofitInstance?.create(IGetUserService::class.java)
         val call = service?.getUserByEmail(userEmail)
-
+        
+        view.progressCircleVisibilityOn()
         call?.enqueue(object : Callback<Array<User>> {
             override fun onFailure(call: Call<Array<User>>, t: Throwable) {
                 view.onJsonError()
+                view.progressCircleVisibilityOff()
             }
 
             override fun onResponse(call: Call<Array<User>>, response: Response<Array<User>>) {
@@ -127,8 +129,9 @@ class LoginPresenter @Inject constructor(private val mUserSession: UserSession) 
                     saveUser(userEmail)
                     view.onUsernameSaved()
                 } else {
-                    view.onLoginUserNonExistentError()
+                    view.onLoginIncorrectUserError()
                 }
+                view.progressCircleVisibilityOff()
             }
         })
     }

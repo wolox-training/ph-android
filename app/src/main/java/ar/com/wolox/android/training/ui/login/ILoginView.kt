@@ -12,19 +12,27 @@ interface ILoginView {
     fun onJsonError()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     fun onLoginIncorrectUserError()
 =======
     fun onLoginUserNonExistentError()
 >>>>>>> Finished connection to JSON.
+=======
+    fun onLoginIncorrectUserError()
+>>>>>>> Created Toast messages to manage REST connection status. Created progress spinner in Login screen for connection attempt.
 
     fun onLoginFieldEmptyError()
 
     fun onLoginUserFormatInvalidError()
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Created Toast messages to manage REST connection status. Created progress spinner in Login screen for connection attempt.
 
     fun progressCircleVisibilityOn()
 
     fun progressCircleVisibilityOff()
+<<<<<<< HEAD
 }
 =======
 
@@ -34,3 +42,6 @@ interface ILoginView {
 =======
 }
 >>>>>>> Finished connection to JSON.
+=======
+}
+>>>>>>> Created Toast messages to manage REST connection status. Created progress spinner in Login screen for connection attempt.
