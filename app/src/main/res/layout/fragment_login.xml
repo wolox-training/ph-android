@@ -84,7 +84,7 @@
                 android:elevation="@dimen/static_spacing_tiny"
                 android:indeterminate="true"
                 android:indeterminateTint="@android:color/holo_blue_dark"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
         </FrameLayout>
 
