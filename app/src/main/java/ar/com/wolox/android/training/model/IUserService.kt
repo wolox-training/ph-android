@@ -4,10 +4,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface IGetUserService {
-    @GET ("/users")
-    fun getAllUsers() : Call<Array<User>>
-
+interface IUserService {
     @GET ("/users")
     fun getUserByEmail(@Query("email") email: String) : Call<Array<User>>
 }

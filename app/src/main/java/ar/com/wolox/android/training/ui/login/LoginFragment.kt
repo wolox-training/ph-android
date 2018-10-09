@@ -37,15 +37,15 @@ class LoginFragment : WolmoFragment<LoginPresenter>(), ILoginView {
     }
 
     override fun onLoginUserNonExistentError() {
-        vUsernameInput.error = "The user you entered does not exist."
+        vUsernameInput.error = R.string.login_error_user_non_existent.toString()
     }
 
     override fun onLoginFieldEmptyError() {
-        vUsernameInput.error = "All fields are mandatory."
+        vUsernameInput.error = R.string.login_error_field_empty.toString()
     }
 
     override fun onLoginUserFormatInvalidError() {
-        vUsernameInput.error = "Invalid format, the correct format is example@domain.com"
+        vUsernameInput.error = R.string.login_error_user_format_invalid.toString()
     }
 
     override fun onUsernameSaved() {
