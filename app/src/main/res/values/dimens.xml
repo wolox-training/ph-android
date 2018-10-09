@@ -11,6 +11,7 @@
     <dimen name="static_spacing_large_extra">28dp</dimen>
     <dimen name="static_spacing_big">36dp</dimen>
     <dimen name="static_spacing_huge">48dp</dimen>
+    <dimen name="static_spacing_huge_more">56dp</dimen>
     <dimen name="static_spacing_huge_extra">60dp</dimen>
     <dimen name="static_spacing_largest">72dp</dimen>
     <dimen name="static_spacing_large_image">230dp</dimen>
