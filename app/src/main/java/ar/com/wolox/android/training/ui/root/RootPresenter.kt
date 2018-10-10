@@ -6,8 +6,12 @@ import javax.inject.Inject
 
 class RootPresenter @Inject constructor(private val sharedPreferences: SharedPreferences) : BasePresenter<IRootView>() {
 
+    companion object UserEmailKey {
+        private const val userEmailKey = "UserEmail"
+    }
+
     fun loadUserPreferences() {
-        val vUserEmail = sharedPreferences.getString("UserEmail", "")
+        val vUserEmail = sharedPreferences.getString(userEmailKey, "")
         if (vUserEmail != null && vUserEmail.isNotEmpty()) {
             view.onSessionLoggedIn()
         } else {
