@@ -12,7 +12,9 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
                                          private val vRetrofitServices: RetrofitServices)
     : BasePresenter<ILoginView>() {
 
-    val userEmailKey = "UserEmail"
+    companion object UserEmailKey {
+        private const val userEmailKey = "USER_EMAIL"
+    }
 
     fun loadUserPreferences() {
         val vUserEmail = sharedPreferences.getString(userEmailKey, "")
@@ -51,16 +53,14 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
     }
 
     private fun validateFields(userEmail: String, userPassword: String): Boolean {
-        var validFields = true
-
         if (userEmail.isEmpty() || userPassword.isEmpty()) {
             view.onLoginFieldEmptyError()
-            validFields = false
+            return false
         } else if (!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
             view.onLoginUserFormatInvalidError()
-            validFields = false
+            return false
         }
-        return validFields
+        return true
     }
 
     private fun saveUser(userEmail: String) {
