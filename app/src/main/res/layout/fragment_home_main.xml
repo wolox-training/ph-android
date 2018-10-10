@@ -41,10 +41,14 @@
         android:id="@+id/vTabLayout"
         android:layout_width="match_parent"
 <<<<<<< HEAD
+<<<<<<< HEAD
         android:layout_height="wrap_content"
 =======
         android:layout_height="@dimen/static_spacing_huge"
 >>>>>>> 'News' and 'Profile' views were created inside the 'Home' page.
+=======
+        android:layout_height="wrap_content"
+>>>>>>> Minor front end adjustments made.
         app:tabMode="fixed"
         app:tabGravity="fill"
         app:tabPadding="@dimen/static_spacing_small"
