@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ar.com.wolox.android.training.ui.home.HomeProfileFragment">
+    tools:context="ar.com.wolox.android.training.ui.home.profile.HomeProfileFragment">
 
     <TextView
         android:layout_width="match_parent"

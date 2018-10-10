@@ -1,4 +1,4 @@
-package ar.com.wolox.android.training.ui.home
+package ar.com.wolox.android.training.ui.home.profile
 
 
 import ar.com.wolox.android.R
