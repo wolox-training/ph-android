@@ -16,13 +16,6 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
         private const val userEmailKey = "UserEmail"
     }
 
-    fun loadUserPreferences() {
-        val vUserEmail = sharedPreferences.getString(userEmailKey, "")
-        if (vUserEmail != null && vUserEmail.isNotEmpty()) {
-            validateUserEmail(vUserEmail)
-        }
-    }
-
     fun login(userEmail: String, userPassword: String) {
         if (validateFields(userEmail, userPassword)) {
             validateUserEmail(userEmail)
