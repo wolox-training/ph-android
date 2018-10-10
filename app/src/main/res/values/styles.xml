@@ -9,7 +9,7 @@
     </style>
 
     <style name="tab_text_style" parent="TextAppearance.Design.Tab">
-        <item name="android:textSize">@dimen/font_small</item>
+        <item name="android:textSize">@dimen/font_medium</item>
         <item name="android:textStyle">bold</item>
     </style>
 
