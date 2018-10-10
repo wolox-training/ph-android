@@ -1,76 +1,62 @@
 package ar.com.wolox.android.training.ui.login
 
-import android.content.Context
 import android.content.Intent
-import android.text.method.LinkMovementMethod
+import android.widget.Toast
 import ar.com.wolox.android.R
 import ar.com.wolox.android.training.ui.home.HomeActivity
 import ar.com.wolox.android.training.ui.signup.SignupActivity
 import ar.com.wolox.android.training.utils.onClickListener
 import ar.com.wolox.android.training.utils.onTextChanged
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
-import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import kotlinx.android.synthetic.main.fragment_login.*
 
-class LoginFragment : WolmoFragment<BasePresenter<Any>>() {
+class LoginFragment : WolmoFragment<LoginPresenter>(), ILoginView {
 
     override fun layout(): Int = R.layout.fragment_login
 
     override fun init() {
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-
-        val vUserName = sharedPref.getString("Username", "")
-        if (vUserName != null && vUserName.isNotEmpty()) {
-            onUsernameSaved()
-        }
+        presenter.loadUserPreferences()
 
         vLoginButton.isEnabled = false
-
         vTermsConditions.setText(R.string.terms_and_conditions)
         vTermsConditions.isClickable = true
-        vTermsConditions.movementMethod = LinkMovementMethod.getInstance()
     }
 
     override fun setListeners() {
         vUsernameInput.onTextChanged { vLoginButton.isEnabled = it.isNotBlank() }
-        vPasswordInput.onTextChanged { vLoginButton.isEnabled = it.isNotBlank() }
         vLoginButton.onClickListener {
-            if (validateFields()) {
-                saveUser()
-                onUsernameSaved()
-            }
+            presenter.login(vUsernameInput.text.toString(), vPasswordInput.text.toString())
         }
         vSignUpButton.onClickListener {
-            onSignUp()
+            presenter.signUp()
         }
     }
 
-    private fun saveUser() {
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        with(sharedPref.edit()) {
-            putString("Username", vUsernameInput.text.toString())
-            commit()
-        }
+    override fun onJsonError() {
+        Toast.makeText(activity?.applicationContext, "Error reading JSON, can't connect to database", Toast.LENGTH_LONG).show()
     }
 
-    private fun validateFields(): Boolean {
-        if (vUsernameInput.text.toString().isEmpty() || vPasswordInput.text.toString().isEmpty()) {
-            vUsernameInput.setError("Todos los campos son obligatorios.")
-            return false
-        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(vUsernameInput.text.toString()).matches()) {
-            vUsernameInput.setError("Formato invalido, un ejemplo válido es example@domain.com")
-            return false
-        }
-        return true
+    override fun onLoginUserNonExistentError() {
+        vUsernameInput.error = R.string.login_error_user_non_existent.toString()
     }
 
-    fun onUsernameSaved() {
+    override fun onLoginFieldEmptyError() {
+        vUsernameInput.error = R.string.login_error_field_empty.toString()
+    }
+
+    override fun onLoginUserFormatInvalidError() {
+        vUsernameInput.error = R.string.login_error_user_format_invalid.toString()
+    }
+
+    override fun onUsernameSaved() {
         val intent = Intent(activity, HomeActivity::class.java)
+
         startActivity(intent)
     }
 
-    fun onSignUp() {
+    override fun onSignUp() {
         val intent = Intent(activity, SignupActivity::class.java)
+
         startActivity(intent)
     }
 }
