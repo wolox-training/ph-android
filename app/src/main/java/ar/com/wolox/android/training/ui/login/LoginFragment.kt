@@ -35,13 +35,8 @@ class LoginFragment : WolmoFragment<LoginPresenter>(), ILoginView {
         Toast.makeText(activity?.applicationContext, "Error reading JSON, can't connect to database", Toast.LENGTH_LONG).show()
     }
 
-<<<<<<< HEAD
-    override fun onLoginUserNonExistentError() {
-        vUsernameInput.error = R.string.login_error_user_non_existent.toString()
-=======
     override fun onLoginIncorrectUserError() {
         Toast.makeText(activity?.applicationContext, "The user you've entered is incorrect.", Toast.LENGTH_LONG).show()
->>>>>>> Created Toast messages to manage REST connection status. Created progress spinner in Login screen for connection attempt.
     }
 
     override fun onLoginFieldEmptyError() {
