@@ -1,14 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/vNewsTextView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/static_spacing_largest_extra"
-        android:gravity="center"/>
+        android:orientation="horizontal">
 
-</LinearLayout>
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/vNewsPictureView"
+            android:layout_width="@dimen/static_spacing_largest_less"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/static_spacing_medium_extra"
+            android:layout_marginVertical="@dimen/static_spacing_medium_extra"
+            fresco:placeholderImage="@color/chuck_status_requested"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/static_spacing_huge_more"
+            android:layout_marginVertical="@dimen/static_spacing_medium_extra"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/vNewsTextViewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/static_spacing_medium_extra"
+                android:gravity="top|start"
+                android:textSize="@dimen/font_medium_more"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/vNewsTextViewText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/static_spacing_small"
+                android:gravity="top|start"
+                android:textSize="@dimen/font_medium_extra" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center|end"
+        android:layout_marginEnd="@dimen/static_spacing_medium_extra"
+        android:layout_marginVertical="@dimen/static_spacing_medium_extra"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/vNewsTextViewDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_medium"
+            android:textStyle="bold"
+            android:text="15m"
+            android:gravity="top|center"/>
+
+        <ImageView
+            android:id="@+id/vNewsLikeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/static_spacing_medium"
+            android:layout_gravity="bottom|center"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_small"
+        android:background="@android:color/darker_gray"
+        android:layout_gravity="bottom"/>
+
+</FrameLayout>
