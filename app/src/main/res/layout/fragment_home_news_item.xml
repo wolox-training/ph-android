@@ -17,7 +17,8 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="@dimen/static_spacing_medium_extra"
             android:layout_marginVertical="@dimen/static_spacing_medium_extra"
-            fresco:placeholderImage="@color/chuck_status_requested"/>
+            fresco:placeholderImage="@color/chuck_status_requested"
+            fresco:roundedCornerRadius="@dimen/rounding_medium"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,17 +59,15 @@
             android:id="@+id/vNewsTextViewDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_medium"
-            android:textStyle="bold"
-            android:text="15m"
-            android:gravity="top|center"/>
+            android:gravity="top|center"
+            android:textSize="@dimen/font_medium_more" />
 
         <ImageView
             android:id="@+id/vNewsLikeView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/static_spacing_medium"
-            android:layout_gravity="bottom|center"/>
+            android:layout_gravity="bottom|center"
+            android:layout_marginTop="@dimen/static_spacing_medium" />
 
     </LinearLayout>
 
