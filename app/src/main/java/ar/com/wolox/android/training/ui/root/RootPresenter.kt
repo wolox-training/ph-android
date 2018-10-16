@@ -12,6 +12,7 @@ class RootPresenter @Inject constructor(private val sharedPreferences: SharedPre
 
     fun loadUserPreferences() {
         val vUserEmail = sharedPreferences.getString(userEmailKey, "")
+
         if (vUserEmail != null && vUserEmail.isNotEmpty()) {
             view.onSessionLoggedIn()
         } else {

@@ -2,6 +2,8 @@ package ar.com.wolox.android.training.di
 
 import ar.com.wolox.android.training.ui.home.HomeActivity
 import ar.com.wolox.android.training.ui.home.HomeFragment
+import ar.com.wolox.android.training.ui.home.HomeNewsFragment
+import ar.com.wolox.android.training.ui.home.HomeProfileFragment
 import ar.com.wolox.android.training.ui.login.LoginActivity
 import ar.com.wolox.android.training.ui.login.LoginFragment
 import ar.com.wolox.android.training.ui.root.RootActivity
@@ -31,6 +33,12 @@ abstract class AppModule {
 
     @ContributesAndroidInjector
     internal abstract fun homeFragment(): HomeFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun homeNewsFragment(): HomeNewsFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun homeProfileFragment(): HomeProfileFragment
 
     @ContributesAndroidInjector
     internal abstract fun signupActivity(): SignupActivity
