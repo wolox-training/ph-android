@@ -9,7 +9,7 @@ class HomeNewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val newsTitle = itemView.vNewsTextViewTitle!!
     val newsText = itemView.vNewsTextViewText!!
     val newsPicture = itemView.vNewsPictureView!!
-    val newsDate = itemView.vNewsTextViewDate
-    val newsLike = itemView.vNewsLikeView
+    val newsDate = itemView.vNewsTextViewDate!!
+    val newsLike = itemView.vNewsLikeView!!
 
 }

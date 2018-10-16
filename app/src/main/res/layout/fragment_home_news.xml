@@ -27,4 +27,15 @@
         fab:fab_colorRipple="@color/colorAccent"
         fab:fab_shadow="false"/>
 
+    <ProgressBar
+        android:id="@+id/vNewsProgressCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:layout_marginEnd="@dimen/static_spacing_medium_extra"
+        android:elevation="@dimen/static_spacing_tiny"
+        android:indeterminate="true"
+        android:indeterminateTint="@android:color/holo_blue_dark"
+        android:visibility="gone" />
+
 </FrameLayout>

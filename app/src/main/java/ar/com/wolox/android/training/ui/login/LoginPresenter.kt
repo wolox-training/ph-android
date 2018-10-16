@@ -3,6 +3,7 @@ package ar.com.wolox.android.training.ui.login
 import android.content.SharedPreferences
 import android.util.Patterns
 import ar.com.wolox.android.training.model.IUserService
+import ar.com.wolox.android.training.model.User
 import ar.com.wolox.android.training.utils.networkCallback
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import ar.com.wolox.wolmo.networking.retrofit.RetrofitServices
@@ -14,6 +15,7 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
 
     companion object UserEmailKey {
         private const val userEmailKey = "UserEmail"
+        private const val userIdKey = "UserId"
     }
 
     fun login(userEmail: String, userPassword: String) {
@@ -34,7 +36,7 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
         call?.enqueue(networkCallback {
             onResponseSuccessful {
                 runIfViewAttached { view ->
-                    saveUser(userEmail)
+                    saveUser(it!![0])
                     view.onUsernameSaved()
                 }
                 view.progressCircleVisibilityOff()
@@ -63,9 +65,10 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
         return true
     }
 
-    private fun saveUser(userEmail: String) {
+    private fun saveUser(user: User) {
         with(sharedPreferences.edit()) {
-            putString(userEmailKey, userEmail)
+            putString(userEmailKey, user.email)
+            putInt(userIdKey, user.id)
             apply()
         }
     }
