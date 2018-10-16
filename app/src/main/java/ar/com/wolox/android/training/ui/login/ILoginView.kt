@@ -7,9 +7,13 @@ interface ILoginView {
 
     fun onJsonError()
 
-    fun onLoginUserNonExistentError()
+    fun onLoginIncorrectUserError()
 
     fun onLoginFieldEmptyError()
 
     fun onLoginUserFormatInvalidError()
+
+    fun progressCircleVisibilityOn()
+
+    fun progressCircleVisibilityOff()
 }

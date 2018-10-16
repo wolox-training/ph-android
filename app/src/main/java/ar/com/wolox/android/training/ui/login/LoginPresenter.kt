@@ -29,18 +29,18 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
     private fun validateUserEmail(userEmail: String) {
         val service = vRetrofitServices.getService(IUserService::class.java)
         val call = service?.getUserByEmail(userEmail)
-
         call?.enqueue(networkCallback {
             onResponseSuccessful {
                 runIfViewAttached { view ->
                     saveUser(userEmail)
                     view.onUsernameSaved()
                 }
+                view.progressCircleVisibilityOff()
             }
 
             onResponseFailed { _, _ -> runIfViewAttached(Runnable { view.onJsonError() }) }
 
-            onCallFailure { runIfViewAttached(Runnable { view.onLoginUserNonExistentError() }) }
+            onCallFailure { runIfViewAttached(Runnable { view.onLoginIncorrectUserError() }) }
         }
         )
     }
