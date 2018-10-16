@@ -9,15 +9,7 @@
     </style>
 
     <style name="tab_text_style" parent="TextAppearance.Design.Tab">
-<<<<<<< HEAD
-<<<<<<< HEAD
         <item name="android:textSize">@dimen/font_medium</item>
-=======
-        <item name="android:textSize">@dimen/font_small</item>
->>>>>>> 'News' and 'Profile' views were created inside the 'Home' page.
-=======
-        <item name="android:textSize">@dimen/font_medium</item>
->>>>>>> Minor front end adjustments made.
         <item name="android:textStyle">bold</item>
     </style>
 

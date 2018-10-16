@@ -14,15 +14,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-<<<<<<< HEAD
-<<<<<<< HEAD
             android:name=".training.ui.root.RootActivity"
-=======
-            android:name=".training.ui.login.LoginActivity"
->>>>>>> Se hizo un refactor general de la aplicacion y se asignaron funcionalidades a los botones LOG IN y SIGN UP
-=======
-            android:name=".training.ui.root.RootActivity"
->>>>>>> Automatic login now administered by a new RootActivity. Minor refactoring.
             android:screenOrientation="portrait">
 
             <intent-filter>
@@ -32,14 +24,6 @@
 
         </activity>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <activity
-            android:name=".training.ui.login.LoginActivity"
-            android:screenOrientation="portrait" />
-
-=======
->>>>>>> Page navigation functionality has been fixed and set. Minor bugs fixed. Minor refactorings made.
         <activity
             android:name=".training.ui.login.LoginActivity"
             android:screenOrientation="portrait" />
@@ -52,11 +36,6 @@
             android:name=".training.ui.signup.SignupActivity"
             android:screenOrientation="portrait" />
 
-<<<<<<< HEAD
-=======
->>>>>>> Se hizo un refactor general de la aplicacion y se asignaron funcionalidades a los botones LOG IN y SIGN UP
-=======
->>>>>>> Page navigation functionality has been fixed and set. Minor bugs fixed. Minor refactorings made.
     </application>
 
 </manifest>

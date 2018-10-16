@@ -1,45 +1,19 @@
 <resources>
 
     <!-- General -->
-<<<<<<< HEAD
-<<<<<<< HEAD
     <string name="terms_and_conditions">By joining you agree to our <a href="https://www.google.com">Terms &amp; Conditions</a></string>
     <string name="wolox_name">Wolox</string>
     <string name="root_textview">Loading...</string>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    <string name="terms_and_conditions">By joining you agree to our <a href="www.google.com">Terms &amp; Conditions</a></string>
->>>>>>> Page navigation functionality has been fixed and set. Minor bugs fixed. Minor refactorings made.
-=======
-    <string name="terms_and_conditions">By joining you agree to our <a href="https://www.google.com">Terms &amp; Conditions</a></string>
->>>>>>> Functional link was added to the login screen. Minor refactoring changes.
-=======
->>>>>>> Automatic login now administered by a new RootActivity. Minor refactoring.
-    <string name="home_textview">This is the Home Screen</string>
-=======
     <string name="home_textview_news">This is the News Screen</string>
     <string name="home_textview_profile">This is the Profile Screen</string>
->>>>>>> 'News' and 'Profile' views were created inside the 'Home' page.
-=======
-    <string name="home_textview_news">This is the News Screen</string>
-    <string name="home_textview_profile">This is the Profile Screen</string>
->>>>>>> 'News' and 'Profile' views were created inside the 'Home' page.
     <string name="signup_textview">This is the Sign Up Screen</string>
     <string name="fragment_login_username">Username</string>
     <string name="fragment_login_password">Password</string>
     <string name="fragment_login_login">Log In</string>
     <string name="fragment_login_signup">Sign Up</string>
-<<<<<<< HEAD
 
     <string name="login_error_user_non_existent">The user you entered does not exist.</string>
     <string name="login_error_field_empty">All fields are mandatory.</string>
     <string name="login_error_user_format_invalid">Invalid format, the correct format is example@domain.com</string>
-=======
->>>>>>> Page navigation functionality has been fixed and set. Minor bugs fixed. Minor refactorings made.
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
