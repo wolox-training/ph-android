@@ -8,7 +8,9 @@ import javax.inject.Inject
 
 class HomeProfileFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>() {
 
-    val title = "PROFILE"
+    companion object {
+        const val title = "PROFILE"
+    }
 
     override fun layout(): Int = R.layout.fragment_home_profile
 

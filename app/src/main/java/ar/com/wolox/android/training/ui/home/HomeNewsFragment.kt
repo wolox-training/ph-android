@@ -8,7 +8,9 @@ import javax.inject.Inject
 
 class HomeNewsFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>() {
 
-    val title = "NEWS"
+    companion object {
+        const val title = "NEWS"
+    }
 
     override fun layout(): Int = R.layout.fragment_home_news
 
