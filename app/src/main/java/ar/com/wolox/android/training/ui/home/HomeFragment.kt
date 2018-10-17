@@ -3,6 +3,8 @@ package ar.com.wolox.android.training.ui.home
 import android.support.v4.app.Fragment
 import android.support.v4.util.Pair
 import ar.com.wolox.android.R
+import ar.com.wolox.android.training.ui.home.news.HomeNewsFragment
+import ar.com.wolox.android.training.ui.home.profile.HomeProfileFragment
 import ar.com.wolox.wolmo.core.adapter.viewpager.SimpleFragmentPagerAdapter
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.presenter.BasePresenter

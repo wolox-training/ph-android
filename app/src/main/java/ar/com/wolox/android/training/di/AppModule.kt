@@ -2,8 +2,8 @@ package ar.com.wolox.android.training.di
 
 import ar.com.wolox.android.training.ui.home.HomeActivity
 import ar.com.wolox.android.training.ui.home.HomeFragment
-import ar.com.wolox.android.training.ui.home.HomeNewsFragment
-import ar.com.wolox.android.training.ui.home.HomeProfileFragment
+import ar.com.wolox.android.training.ui.home.news.HomeNewsFragment
+import ar.com.wolox.android.training.ui.home.profile.HomeProfileFragment
 import ar.com.wolox.android.training.ui.login.LoginActivity
 import ar.com.wolox.android.training.ui.login.LoginFragment
 import ar.com.wolox.android.training.ui.root.RootActivity

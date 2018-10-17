@@ -13,12 +13,17 @@
     <dimen name="static_spacing_huge">48dp</dimen>
     <dimen name="static_spacing_huge_more">56dp</dimen>
     <dimen name="static_spacing_huge_extra">60dp</dimen>
+    <dimen name="static_spacing_largest_less">64dp</dimen>
     <dimen name="static_spacing_largest">72dp</dimen>
+    <dimen name="static_spacing_largest_extra">88dp</dimen>
     <dimen name="static_spacing_large_image">230dp</dimen>
 
     <!-- Frames sizes -->
+    <dimen name="framing_medium">210dp</dimen>
     <dimen name="framing_large">225dp</dimen>
 
+    <!-- Rounding sizes -->
+    <dimen name="rounding_medium">4dp</dimen>
 
     <!-- Spacing -->
     <dimen name="spacing_none">0dp</dimen>
@@ -52,5 +57,6 @@
     <dimen name="font_big">22sp</dimen>
     <dimen name="font_huge">24sp</dimen>
 
-    <!-- Add your custom dimens here -->
+    <!-- Lines -->
+    <dimen name="line_small">1dp</dimen>
 </resources>

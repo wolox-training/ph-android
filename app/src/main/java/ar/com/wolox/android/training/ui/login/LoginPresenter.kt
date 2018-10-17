@@ -29,6 +29,8 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
     private fun validateUserEmail(userEmail: String) {
         val service = vRetrofitServices.getService(IUserService::class.java)
         val call = service?.getUserByEmail(userEmail)
+
+        view.progressCircleVisibilityOn()
         call?.enqueue(networkCallback {
             onResponseSuccessful {
                 runIfViewAttached { view ->
@@ -38,11 +40,16 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
                 view.progressCircleVisibilityOff()
             }
 
-            onResponseFailed { _, _ -> runIfViewAttached(Runnable { view.onJsonError() }) }
+            onResponseFailed { _, _ -> runIfViewAttached(Runnable {
+                view.onJsonError()
+                view.progressCircleVisibilityOff()
+            }) }
 
-            onCallFailure { runIfViewAttached(Runnable { view.onLoginIncorrectUserError() }) }
-        }
-        )
+            onCallFailure { runIfViewAttached(Runnable {
+                view.onLoginIncorrectUserError()
+                view.progressCircleVisibilityOff()
+            }) }
+        })
     }
 
     private fun validateFields(userEmail: String, userPassword: String): Boolean {

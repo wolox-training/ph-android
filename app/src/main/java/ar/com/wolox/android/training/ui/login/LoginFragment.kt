@@ -32,11 +32,11 @@ class LoginFragment : WolmoFragment<LoginPresenter>(), ILoginView {
     }
 
     override fun onJsonError() {
-        Toast.makeText(activity?.applicationContext, "Error reading JSON, can't connect to database", Toast.LENGTH_LONG).show()
+        Toast.makeText(activity?.applicationContext, R.string.login_error_json_connection, Toast.LENGTH_LONG).show()
     }
 
     override fun onLoginIncorrectUserError() {
-        vUsernameInput.error = R.string.login_error_user_non_existent.toString()
+        Toast.makeText(activity?.applicationContext, R.string.login_error_user_format_invalid, Toast.LENGTH_LONG).show()
     }
 
     override fun onLoginFieldEmptyError() {
