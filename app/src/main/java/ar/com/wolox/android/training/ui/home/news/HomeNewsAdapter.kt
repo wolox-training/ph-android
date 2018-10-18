@@ -4,20 +4,24 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import ar.com.wolox.android.R
 import ar.com.wolox.android.training.model.News
 import ar.com.wolox.android.training.utils.onClickListener
+import kotlinx.android.synthetic.main.fragment_home_news_item.view.*
 import org.ocpsoft.prettytime.PrettyTime
 import java.text.SimpleDateFormat
 import javax.inject.Inject
 
-class HomeNewsAdapter @Inject constructor(private val sharedPreferences: SharedPreferences,
-                                          private val newsList: Array<News>,
-                                          private val context: Context)
-    : RecyclerView.Adapter<HomeNewsViewHolder>() {
 
-    companion object UserEmailKey {
+
+class HomeNewsAdapter @Inject constructor(private val sharedPreferences: SharedPreferences,
+                                          private var newsList: MutableList<News>,
+                                          private val context: Context)
+    : RecyclerView.Adapter<HomeNewsAdapter.HomeNewsViewHolder>() {
+
+    companion object {
         private const val userIdKey = "UserId"
     }
 
@@ -56,5 +60,19 @@ class HomeNewsAdapter @Inject constructor(private val sharedPreferences: SharedP
                 holder.newsLike.tag = R.drawable.ic_like_off
             }
         }
+    }
+
+    fun addNews(news: List<News>){
+        newsList.addAll(news)
+    }
+
+    class HomeNewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        val newsTitle = itemView.vNewsTextViewTitle!!
+        val newsText = itemView.vNewsTextViewText!!
+        val newsPicture = itemView.vNewsPictureView!!
+        val newsDate = itemView.vNewsTextViewDate!!
+        val newsLike = itemView.vNewsLikeView!!
+
     }
 }

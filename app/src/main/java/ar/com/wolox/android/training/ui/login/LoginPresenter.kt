@@ -13,7 +13,7 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
                                          private val vRetrofitServices: RetrofitServices)
     : BasePresenter<ILoginView>() {
 
-    companion object UserEmailKey {
+    companion object {
         private const val userEmailKey = "UserEmail"
         private const val userIdKey = "UserId"
     }

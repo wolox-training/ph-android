@@ -4,7 +4,7 @@ import ar.com.wolox.android.training.model.News
 
 interface IHomeNewsView {
 
-    fun onNewsFound(news: Array<News>)
+    fun onNewsFound(news: MutableList<News>)
 
     fun onJsonError()
 
