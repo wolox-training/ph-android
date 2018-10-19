@@ -6,9 +6,11 @@ interface IHomeNewsView {
 
     fun onNewsFound(news: MutableList<News>)
 
-    fun onJsonError()
+    fun onCallFailed()
 
-    fun onNewsUpdateError()
+    fun onCallRequested()
+
+    fun onNoNewsAvailable()
 
     fun progressCircleVisibilityOn()
 

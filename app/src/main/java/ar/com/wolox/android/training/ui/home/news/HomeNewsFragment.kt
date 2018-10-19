@@ -34,6 +34,7 @@ class HomeNewsFragment @Inject constructor() : WolmoFragment<HomeNewsPresenter>(
     override fun layout(): Int = R.layout.fragment_home_news
 
     override fun init() {
+        onCallRequested()
         presenter.loadNews(pageIndex, newsPerPage)
         newsList = vHomeNewsRecyclerView
         fab = vFloatingActionButton
@@ -51,24 +52,31 @@ class HomeNewsFragment @Inject constructor() : WolmoFragment<HomeNewsPresenter>(
 
                 if (!isLoading && !isLastPage) {
                     if (visibleItemCount + firstVisibleItemPosition >= totalItemCount) {
+                        onCallRequested()
                         presenter.loadNews(pageIndex, newsPerPage)
                     }
                 }
             }
         })
         vHomeNewsPullToRefresh.setOnRefreshListener {
-            pageIndex = 1
-            isLastPage = false
-            vHomeNewsPullToRefresh.isRefreshing = false
+            resetNewsView()
+            onCallRequested()
             presenter.loadNews(pageIndex, newsPerPage)
         }
     }
 
+    private fun resetNewsView(){
+        pageIndex = 1
+        isLastPage = false
+        vHomeNewsPullToRefresh.isRefreshing = false
+    }
+
     override fun onNewsFound(news: MutableList<News>){
+        progressCircleVisibilityOff()
         if (pageIndex == 1){
-            news.addAll(news)   // 4
-            news.addAll(news)   // 8
-            news.addAll(news)   // 16
+            news.addAll(news)   // 4    This hardcoded expanded news list is made exclusively
+            news.addAll(news)   // 8    to fully test the proper working of the paging and
+            news.addAll(news)   // 16   update functionalities, given the limited JSon database
             news.addAll(news)   // 32
             newsListLayoutManager = LinearLayoutManager(context)
             newsList.layoutManager = newsListLayoutManager
@@ -84,13 +92,19 @@ class HomeNewsFragment @Inject constructor() : WolmoFragment<HomeNewsPresenter>(
         ++pageIndex
     }
 
-    override fun onJsonError() {
+    override fun onCallFailed() {
         Toast.makeText(activity?.applicationContext, R.string.login_error_json_connection, Toast.LENGTH_LONG).show()
+        progressCircleVisibilityOff()
     }
 
-    override fun onNewsUpdateError(){
+    override fun onCallRequested() {
+        progressCircleVisibilityOn()
+    }
+
+    override fun onNoNewsAvailable(){
         isLastPage = true
         Toast.makeText(activity?.applicationContext, R.string.login_error_news_update, Toast.LENGTH_LONG).show()
+        progressCircleVisibilityOff()
     }
 
     override fun progressCircleVisibilityOn() {

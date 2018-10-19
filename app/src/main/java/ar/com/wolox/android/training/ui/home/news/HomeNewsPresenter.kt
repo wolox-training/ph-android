@@ -12,38 +12,25 @@ class HomeNewsPresenter @Inject constructor(private val vRetrofitServices: Retro
 
     fun loadNews(pageIndex: Int, newsPerPage: Int){
         val service = vRetrofitServices.getService(INewsService::class.java)
-        val call = service?.getAllNews("email")
+        val call = service?.getAllNews()
 
-        view.progressCircleVisibilityOn()
         call?.enqueue(networkCallback {
             onResponseSuccessful {
-                runIfViewAttached { view ->
+                runIfViewAttached { _ ->
                     val fromIndex = (pageIndex-1)*newsPerPage
                     val toIndex = min(pageIndex*newsPerPage,it!!.size)
 
                     if (fromIndex <= toIndex){
                         view.onNewsFound(it.copyOfRange(fromIndex,toIndex).toMutableList())
                     } else {
-                        noMoreNewsError()
+                        view.onNoNewsAvailable()
                     }
                 }
-                view.progressCircleVisibilityOff()
             }
 
-            onResponseFailed { _, _ -> runIfViewAttached(Runnable {
-                view.onJsonError()
-                view.progressCircleVisibilityOff()
-            }) }
-
             onCallFailure { runIfViewAttached(Runnable {
-                noMoreNewsError()
-                view.progressCircleVisibilityOff()
+                view.onCallFailed()
             }) }
         })
-    }
-
-    private fun noMoreNewsError(){
-        view.onNewsUpdateError()
-        view.progressCircleVisibilityOff()
     }
 }

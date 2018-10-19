@@ -35,20 +35,17 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
         view.progressCircleVisibilityOn()
         call?.enqueue(networkCallback {
             onResponseSuccessful {
-                runIfViewAttached { view ->
-                    saveUser(it!![0])
+                if (it!!.isNotEmpty()){
+                    saveUser(it[0])
                     view.onUsernameSaved()
+                } else {
+                    view.onLoginIncorrectUserError()
                 }
                 view.progressCircleVisibilityOff()
             }
 
-            onResponseFailed { _, _ -> runIfViewAttached(Runnable {
-                view.onJsonError()
-                view.progressCircleVisibilityOff()
-            }) }
-
             onCallFailure { runIfViewAttached(Runnable {
-                view.onLoginIncorrectUserError()
+                view.onJsonError()
                 view.progressCircleVisibilityOff()
             }) }
         })
