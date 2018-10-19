@@ -133,6 +133,9 @@ dependencies {
     //pretty time
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
 
+    //EventBus
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
     // Third-party
     implementation "com.jakewharton:butterknife:$butterknife_version"
     kapt "com.jakewharton:butterknife-compiler:$butterknife_version"

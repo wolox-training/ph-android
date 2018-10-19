@@ -12,6 +12,8 @@
     <string name="fragment_login_login">Log In</string>
     <string name="fragment_login_signup">Sign Up</string>
 
+    <string name="news_details_top">Post</string>
+
     <string name="login_error_user_non_existent">The user you entered does not exist.</string>
     <string name="login_error_field_empty">All fields are mandatory.</string>
     <string name="login_error_user_format_invalid">Invalid format, the correct format is example@domain.com</string>
