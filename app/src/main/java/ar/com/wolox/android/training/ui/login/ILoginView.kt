@@ -1,11 +1,13 @@
 package ar.com.wolox.android.training.ui.login
 
 interface ILoginView {
+    fun onCallRequested()
+
     fun onUsernameSaved()
 
     fun onSignUp()
 
-    fun onJsonError()
+    fun onLoginJsonError()
 
     fun onLoginIncorrectUserError()
 

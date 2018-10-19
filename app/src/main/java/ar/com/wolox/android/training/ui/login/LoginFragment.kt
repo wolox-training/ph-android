@@ -31,11 +31,17 @@ class LoginFragment : WolmoFragment<LoginPresenter>(), ILoginView {
         }
     }
 
-    override fun onJsonError() {
+    override fun onCallRequested(){
+        progressCircleVisibilityOn()
+    }
+
+    override fun onLoginJsonError() {
+        progressCircleVisibilityOff()
         Toast.makeText(context, R.string.login_error_json_connection, Toast.LENGTH_LONG).show()
     }
 
     override fun onLoginIncorrectUserError() {
+        progressCircleVisibilityOff()
         Toast.makeText(context, R.string.login_error_user_non_existent, Toast.LENGTH_LONG).show()
     }
 
@@ -50,6 +56,7 @@ class LoginFragment : WolmoFragment<LoginPresenter>(), ILoginView {
     override fun onUsernameSaved() {
         val intent = Intent(activity, HomeActivity::class.java)
 
+        progressCircleVisibilityOff()
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }

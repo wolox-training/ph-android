@@ -20,6 +20,7 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
 
     fun login(userEmail: String, userPassword: String) {
         if (validateFields(userEmail, userPassword)) {
+            view.onCallRequested()
             validateUserEmail(userEmail)
         }
     }
@@ -32,7 +33,6 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
         val service = vRetrofitServices.getService(IUserService::class.java)
         val call = service?.getUserByEmail(userEmail)
 
-        view.progressCircleVisibilityOn()
         call?.enqueue(networkCallback {
             onResponseSuccessful {
                 if (it!!.isNotEmpty()){
@@ -41,12 +41,10 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
                 } else {
                     view.onLoginIncorrectUserError()
                 }
-                view.progressCircleVisibilityOff()
             }
 
             onCallFailure { runIfViewAttached(Runnable {
-                view.onJsonError()
-                view.progressCircleVisibilityOff()
+                view.onLoginJsonError()
             }) }
         })
     }
