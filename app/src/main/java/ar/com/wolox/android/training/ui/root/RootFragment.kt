@@ -5,8 +5,9 @@ import ar.com.wolox.android.R
 import ar.com.wolox.android.training.ui.home.HomeActivity
 import ar.com.wolox.android.training.ui.login.LoginActivity
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
+import javax.inject.Inject
 
-class RootFragment : WolmoFragment<RootPresenter>(), IRootView {
+class RootFragment @Inject constructor() : WolmoFragment<RootPresenter>(), IRootView {
 
     override fun layout(): Int = R.layout.fragment_root
 

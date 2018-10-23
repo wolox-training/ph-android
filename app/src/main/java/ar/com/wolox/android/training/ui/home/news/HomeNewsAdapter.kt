@@ -8,8 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import ar.com.wolox.android.R
 import ar.com.wolox.android.training.model.News
-import ar.com.wolox.android.training.utils.onClickListener
+import ar.com.wolox.android.training.ui.home.news.detail.NewsDetailMessage
 import kotlinx.android.synthetic.main.fragment_home_news_item.view.*
+import org.greenrobot.eventbus.EventBus
 import org.ocpsoft.prettytime.PrettyTime
 import java.text.SimpleDateFormat
 import javax.inject.Inject
@@ -46,21 +47,16 @@ class HomeNewsAdapter @Inject constructor(private val sharedPreferences: SharedP
 
         holder.newsDate.text = prettyTime.format(simpleDateFormat.parse(newsList[position].date))
 
-        if(newsList[position].likes.contains(sharedPreferences.getInt(userIdKey,0))){
+        if(newsList[position].likes.contains(sharedPreferences.getInt(userIdKey,-1))){
             holder.newsLike.setImageResource(R.drawable.ic_like_on)
             holder.newsLike.tag = R.drawable.ic_like_on
         } else {
             holder.newsLike.setImageResource(R.drawable.ic_like_off)
             holder.newsLike.tag = R.drawable.ic_like_off
         }
-        holder.newsLike.onClickListener {
-            if(holder.newsLike.tag == R.drawable.ic_like_off) {
-                holder.newsLike.setImageResource(R.drawable.ic_like_on)
-                holder.newsLike.tag = R.drawable.ic_like_on
-            } else if(holder.newsLike.tag == R.drawable.ic_like_on) {
-                holder.newsLike.setImageResource(R.drawable.ic_like_off)
-                holder.newsLike.tag = R.drawable.ic_like_off
-            }
+
+        holder.itemView.setOnClickListener {
+            EventBus.getDefault().post(NewsDetailMessage(newsList[position]))
         }
     }
 

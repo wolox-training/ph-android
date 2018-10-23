@@ -1,10 +1,8 @@
 package ar.com.wolox.android.training.ui.home.news.detail
 
 import ar.com.wolox.android.training.model.News
+import javax.inject.Inject
 
-interface INewsDetailView {
+class NewsDetailMessage @Inject constructor(val post: News) {
 
-    fun loadNewsData(newsPost: News)
-
-    fun onJsonError()
 }

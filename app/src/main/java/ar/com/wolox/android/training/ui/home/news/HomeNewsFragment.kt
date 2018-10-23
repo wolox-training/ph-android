@@ -1,6 +1,7 @@
 package ar.com.wolox.android.training.ui.home.news
 
 
+import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -8,11 +9,14 @@ import android.widget.Toast
 import ar.com.wolox.android.R
 import ar.com.wolox.android.training.BaseConfiguration
 import ar.com.wolox.android.training.model.News
+import ar.com.wolox.android.training.ui.home.news.detail.NewsDetailActivity
+import ar.com.wolox.android.training.ui.home.news.detail.NewsDetailMessage
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import com.melnykov.fab.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_home_news.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import javax.inject.Inject
-
 
 
 class HomeNewsFragment @Inject constructor() : WolmoFragment<HomeNewsPresenter>(), IHomeNewsView {
@@ -24,6 +28,7 @@ class HomeNewsFragment @Inject constructor() : WolmoFragment<HomeNewsPresenter>(
         private var isLastPage = false
         private var isLoading = false
         private const val newsPerPage = 2
+        private const val intentExtra = "newsDetailMessage"
     }
 
     private lateinit var newsList : RecyclerView
@@ -62,13 +67,22 @@ class HomeNewsFragment @Inject constructor() : WolmoFragment<HomeNewsPresenter>(
             resetNewsView()
             onCallRequested()
             presenter.loadNews(pageIndex, newsPerPage)
+            vHomeNewsPullToRefresh.isRefreshing = false
         }
     }
 
-    private fun resetNewsView(){
+    private fun resetNewsView() {
         pageIndex = 1
         isLastPage = false
         vHomeNewsPullToRefresh.isRefreshing = false
+    }
+
+    @Subscribe
+    override fun onNewsDetailMessage(newsDetailMessage: NewsDetailMessage){
+        val intent = Intent(activity, NewsDetailActivity::class.java)
+
+        intent.putExtra(intentExtra, newsDetailMessage.post)
+        startActivity(intent)
     }
 
     override fun onNewsFound(news: MutableList<News>){
@@ -115,6 +129,16 @@ class HomeNewsFragment @Inject constructor() : WolmoFragment<HomeNewsPresenter>(
     override fun progressCircleVisibilityOff() {
         isLoading = false
         vNewsProgressCircle.visibility = View.GONE
+    }
+
+    override fun onPause() {
+        EventBus.getDefault().unregister(this)
+        super.onPause()
+    }
+
+    override fun onResume() {
+        EventBus.getDefault().register(this)
+        super.onResume()
     }
 
 }

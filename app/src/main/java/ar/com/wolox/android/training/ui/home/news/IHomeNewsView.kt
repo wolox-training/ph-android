@@ -1,6 +1,7 @@
 package ar.com.wolox.android.training.ui.home.news
 
 import ar.com.wolox.android.training.model.News
+import ar.com.wolox.android.training.ui.home.news.detail.NewsDetailMessage
 
 interface IHomeNewsView {
 
@@ -15,4 +16,6 @@ interface IHomeNewsView {
     fun progressCircleVisibilityOn()
 
     fun progressCircleVisibilityOff()
+
+    fun onNewsDetailMessage(newsDetailMessage: NewsDetailMessage)
 }

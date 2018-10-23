@@ -2,9 +2,8 @@ package ar.com.wolox.android.training.ui.signup
 
 import ar.com.wolox.android.R
 import ar.com.wolox.wolmo.core.activity.WolmoActivity
-import javax.inject.Inject
 
-class SignupActivity @Inject constructor() : WolmoActivity() {
+class SignupActivity : WolmoActivity() {
 
     override fun layout(): Int = R.layout.activity_base
 

@@ -1,103 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/vNewsDetailPullToRefresh"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/framing_huge">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/static_spacing_huge_more"
-            android:elevation="@dimen/static_spacing_tiny"
-            android:background="@color/colorPrimaryAlpha"
-            android:orientation="horizontal">
-
-            <FrameLayout
-                android:id="@+id/vNewsDetailBack"
-                android:layout_width="@dimen/static_spacing_huge_more"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_back" />
-
-            </FrameLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/static_spacing_medium_extra"
-                android:gravity="start|center"
-                android:textSize="@dimen/font_large_extra"
-                android:textStyle="bold"
-                android:textColor="@drawable/ic_back"
-                android:text="@string/news_details_top"/>
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/vNewsDetailPictureView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </FrameLayout>
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="@dimen/static_spacing_medium_extra"
-        android:layout_marginVertical="@dimen/static_spacing_medium_extra"
         android:orientation="vertical">
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/static_spacing_medium">
+            android:layout_height="@dimen/framing_huge">
 
-            <TextView
-                android:id="@+id/vNewsDetailTitle"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|start"
-                android:layout_marginEnd="@dimen/static_spacing_huge"
-                android:gravity="center"
-                android:textSize="@dimen/font_large_extra"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/vNewsDetailDate"
-                android:layout_width="@dimen/static_spacing_huge"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|end"
-                android:gravity="center"
-                android:textSize="@dimen/font_medium_more" />
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/vNewsDetailContent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/static_spacing_huge_more"
-                android:gravity="start|top" />
-
-            <ImageView
-                android:id="@+id/vNewsDetailLike"
-                android:layout_width="@dimen/static_spacing_huge_more"
                 android:layout_height="@dimen/static_spacing_huge_more"
-                android:layout_gravity="bottom|center" />
+                android:background="@color/colorPrimaryAlpha"
+                android:elevation="@dimen/static_spacing_tiny"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/vNewsDetailBack"
+                    android:layout_width="@dimen/static_spacing_huge_more"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorFullAlpha"
+                    android:src="@drawable/ic_back" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/static_spacing_medium_extra"
+                    android:gravity="start|center"
+                    android:text="@string/news_details_top"
+                    android:textColor="@color/chuck_status_default"
+                    android:textSize="@dimen/font_large_extra"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/vNewsDetailPictureView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/static_spacing_medium_extra"
+            android:layout_marginVertical="@dimen/static_spacing_medium_extra"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/static_spacing_medium">
+
+                <TextView
+                    android:id="@+id/vNewsDetailTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|start"
+                    android:layout_marginEnd="@dimen/static_spacing_huge"
+                    android:gravity="center"
+                    android:textSize="@dimen/font_large_extra"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/vNewsDetailDate"
+                    android:layout_width="@dimen/static_spacing_huge"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center|end"
+                    android:gravity="center"
+                    android:textSize="@dimen/font_medium_more" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/vNewsDetailContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/static_spacing_huge_more"
+                    android:gravity="start|top" />
+
+                <ImageView
+                    android:id="@+id/vNewsDetailLike"
+                    android:layout_width="@dimen/static_spacing_huge_more"
+                    android:layout_height="@dimen/static_spacing_huge_more"
+                    android:layout_gravity="bottom|center" />
+
+            </FrameLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

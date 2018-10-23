@@ -35,6 +35,7 @@
         <activity
             android:name=".training.ui.signup.SignupActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".training.ui.home.news.detail.NewsDetailActivity" />
 
     </application>
 
