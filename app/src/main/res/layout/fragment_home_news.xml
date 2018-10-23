@@ -8,23 +8,40 @@
     android:orientation="vertical"
     tools:context="ar.com.wolox.android.training.ui.home.news.HomeNewsFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/vHomeNewsRecyclerView"
-        android:scrollbars="vertical"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/vHomeNewsPullToRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/vHomeNewsRecyclerView"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/vFloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/static_spacing_medium_extra"
         android:src="@drawable/ic_action_content_new"
         fab:fab_colorNormal="@color/colorGreenAlpha"
         fab:fab_colorPressed="@color/colorAccent"
         fab:fab_colorRipple="@color/colorAccent"
         fab:fab_shadow="false"/>
+
+    <ProgressBar
+        android:id="@+id/vNewsProgressCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:layout_marginEnd="@dimen/static_spacing_medium_extra"
+        android:elevation="@dimen/static_spacing_tiny"
+        android:indeterminate="true"
+        android:indeterminateTint="@android:color/holo_blue_dark"
+        android:visibility="gone" />
 
 </FrameLayout>

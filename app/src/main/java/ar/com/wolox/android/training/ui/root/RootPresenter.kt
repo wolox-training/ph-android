@@ -6,6 +6,10 @@ import javax.inject.Inject
 
 class RootPresenter @Inject constructor(private val sharedPreferences: SharedPreferences) : BasePresenter<IRootView>() {
 
+    companion object {
+        private const val userEmailKey = "UserEmail"
+    }
+
     fun loadUserPreferences() {
         val vUserEmail = sharedPreferences.getString(userEmailKey, "")
 

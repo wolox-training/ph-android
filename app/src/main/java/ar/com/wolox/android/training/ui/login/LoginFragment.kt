@@ -31,25 +31,32 @@ class LoginFragment : WolmoFragment<LoginPresenter>(), ILoginView {
         }
     }
 
-    override fun onJsonError() {
-        Toast.makeText(activity?.applicationContext, R.string.login_error_json_connection, Toast.LENGTH_LONG).show()
+    override fun onCallRequested(){
+        progressCircleVisibilityOn()
+    }
+
+    override fun onLoginJsonError() {
+        progressCircleVisibilityOff()
+        Toast.makeText(context, R.string.login_error_json_connection, Toast.LENGTH_LONG).show()
     }
 
     override fun onLoginIncorrectUserError() {
-        Toast.makeText(activity?.applicationContext, R.string.login_error_user_format_invalid, Toast.LENGTH_LONG).show()
+        progressCircleVisibilityOff()
+        Toast.makeText(context, R.string.login_error_user_non_existent, Toast.LENGTH_LONG).show()
     }
 
     override fun onLoginFieldEmptyError() {
-        vUsernameInput.error = R.string.login_error_field_empty.toString()
+        vUsernameInput.error = context?.getString(R.string.login_error_field_empty)
     }
 
     override fun onLoginUserFormatInvalidError() {
-        vUsernameInput.error = R.string.login_error_user_format_invalid.toString()
+        vUsernameInput.error = context?.getString(R.string.login_error_user_format_invalid)
     }
 
     override fun onUsernameSaved() {
         val intent = Intent(activity, HomeActivity::class.java)
 
+        progressCircleVisibilityOff()
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }

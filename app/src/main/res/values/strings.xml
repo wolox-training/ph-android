@@ -3,7 +3,7 @@
     <!-- General -->
     <string name="terms_and_conditions">By joining you agree to our <a href="https://www.google.com">Terms &amp; Conditions</a></string>
     <string name="wolox_name">Wolox</string>
-    <string name="root_textview">Loading...</string>
+    <string name="root_textview">Loading…</string>
     <string name="home_textview_news">This is the News Screen</string>
     <string name="home_textview_profile">This is the Profile Screen</string>
     <string name="signup_textview">This is the Sign Up Screen</string>
@@ -16,5 +16,6 @@
     <string name="login_error_field_empty">All fields are mandatory.</string>
     <string name="login_error_user_format_invalid">Invalid format, the correct format is example@domain.com</string>
     <string name="login_error_json_connection">Error reading JSON, can\'t connect to database</string>
+    <string name="login_error_news_update">There are no more news available</string>
 
 </resources>

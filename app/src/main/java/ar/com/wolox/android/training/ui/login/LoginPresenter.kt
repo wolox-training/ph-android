@@ -3,6 +3,7 @@ package ar.com.wolox.android.training.ui.login
 import android.content.SharedPreferences
 import android.util.Patterns
 import ar.com.wolox.android.training.model.IUserService
+import ar.com.wolox.android.training.model.User
 import ar.com.wolox.android.training.utils.networkCallback
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import ar.com.wolox.wolmo.networking.retrofit.RetrofitServices
@@ -12,12 +13,14 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
                                          private val vRetrofitServices: RetrofitServices)
     : BasePresenter<ILoginView>() {
 
-    companion object UserEmailKey {
+    companion object {
         private const val userEmailKey = "UserEmail"
+        private const val userIdKey = "UserId"
     }
 
     fun login(userEmail: String, userPassword: String) {
         if (validateFields(userEmail, userPassword)) {
+            view.onCallRequested()
             validateUserEmail(userEmail)
         }
     }
@@ -30,24 +33,18 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
         val service = vRetrofitServices.getService(IUserService::class.java)
         val call = service?.getUserByEmail(userEmail)
 
-        view.progressCircleVisibilityOn()
         call?.enqueue(networkCallback {
             onResponseSuccessful {
-                runIfViewAttached { view ->
-                    saveUser(userEmail)
+                if (it!!.isNotEmpty()){
+                    saveUser(it[0])
                     view.onUsernameSaved()
+                } else {
+                    view.onLoginIncorrectUserError()
                 }
-                view.progressCircleVisibilityOff()
             }
 
-            onResponseFailed { _, _ -> runIfViewAttached(Runnable {
-                view.onJsonError()
-                view.progressCircleVisibilityOff()
-            }) }
-
             onCallFailure { runIfViewAttached(Runnable {
-                view.onLoginIncorrectUserError()
-                view.progressCircleVisibilityOff()
+                view.onLoginJsonError()
             }) }
         })
     }
@@ -63,9 +60,10 @@ class LoginPresenter @Inject constructor(private val sharedPreferences: SharedPr
         return true
     }
 
-    private fun saveUser(userEmail: String) {
+    private fun saveUser(user: User) {
         with(sharedPreferences.edit()) {
-            putString(userEmailKey, userEmail)
+            putString(userEmailKey, user.email)
+            putInt(userIdKey, user.id)
             apply()
         }
     }

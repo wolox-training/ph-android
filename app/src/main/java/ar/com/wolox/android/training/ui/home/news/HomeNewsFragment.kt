@@ -3,47 +3,118 @@ package ar.com.wolox.android.training.ui.home.news
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
+import android.widget.Toast
 import ar.com.wolox.android.R
+import ar.com.wolox.android.training.BaseConfiguration
+import ar.com.wolox.android.training.model.News
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
-import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import com.melnykov.fab.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_home_news.*
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
-class HomeNewsFragment @Inject constructor() : WolmoFragment<BasePresenter<Any>>() {
+
+
+class HomeNewsFragment @Inject constructor() : WolmoFragment<HomeNewsPresenter>(), IHomeNewsView {
 
     val title = "NEWS"
 
+    companion object {
+        private var pageIndex = 1
+        private var isLastPage = false
+        private var isLoading = false
+        private const val newsPerPage = 2
+    }
+
     private lateinit var newsList : RecyclerView
+    private lateinit var newsListAdapter: HomeNewsAdapter
+    private lateinit var newsListLayoutManager: LinearLayoutManager
     private lateinit var fab : FloatingActionButton
-    private var news:MutableList<HomeNews> = ArrayList()
 
     override fun layout(): Int = R.layout.fragment_home_news
 
     override fun init() {
-        var simpleDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse("2016-01-24T16:00:00.000Z")
-
-        val home = HomeNews("Como cuidar los muebles de cuero","Hace un año, Marisa Bello, bibliotecóloga de La Plata, separada, 51 años, condujo un auto ultralujoso. Luego, durmió profundamente. Más tarde, se rió a carcajadas y olió un perfume indescriptible. Todo eso lo vivió desde una silla, apostada en el escenario de un pabellón de Tecnópolis. Para ella, sucedió durante una hora. \"En realidad, estuvo entre dieciséis y dieciocho minutos, que es el tiempo máximo que utilizamos durante nuestros espectáculos para hipnotizar a la gente -explica Gonzalo Blanc, un abogado de 41 años-. Pero la percepción del tiempo en ese estado es otra, y eso la llevó a sentir la experiencia mucho más larga\". Durante dieciséis presentaciones en Tecnópolis, Gonzalo, junto con el médico Daniel West, de 30 años, practicaron hipnosis colectiva sobre el público. Los dos viven en Montevideo y se dedican desde hace más de diez años a investigar las neurociencias. Dan seminarios, conferencias y talleres empresariales para mejorar el rendimiento a través de la hipnosis -tuvieron clientes como YPF, Telefónica, L'Oréal y Santillana-; practican hipnosis clínica para atenuar el dolor y curar patologías, y sus conferencias en TEDx Durazno y en TEDx Río de la Plata, llamadas \"¿Se puede entrenar a la mente para ser exitosos?\", tienen más de 150.000 reproducciones. " , "https://bucket1.glanacion.com/anexos/fotos/50/2082050.jpg", simpleDate)
-        news.add(home)
-        news.add(home)
-        news.add(home)
-        news.add(home)
-        news.add(home)
-        news.add(home)
-        news.add(home)
-        news.add(home)
-        news.add(home)
-        news.add(home)
-
+        onCallRequested()
+        presenter.loadNews(pageIndex, newsPerPage)
         newsList = vHomeNewsRecyclerView
         fab = vFloatingActionButton
+    }
 
-        newsList.layoutManager = LinearLayoutManager(context)
-        newsList.adapter = HomeNewsAdapter(news, context!!)
+    override fun setListeners() {
+        super.setListeners()
+        newsList.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
 
-        fab.attachToRecyclerView(newsList)
+                val visibleItemCount = newsListLayoutManager.childCount
+                val totalItemCount = newsListLayoutManager.itemCount
+                val firstVisibleItemPosition = newsListLayoutManager.findFirstVisibleItemPosition()
+
+                if (!isLoading && !isLastPage) {
+                    if (visibleItemCount + firstVisibleItemPosition >= totalItemCount) {
+                        onCallRequested()
+                        presenter.loadNews(pageIndex, newsPerPage)
+                    }
+                }
+            }
+        })
+        vHomeNewsPullToRefresh.setOnRefreshListener {
+            resetNewsView()
+            onCallRequested()
+            presenter.loadNews(pageIndex, newsPerPage)
+        }
+    }
+
+    private fun resetNewsView(){
+        pageIndex = 1
+        isLastPage = false
+        vHomeNewsPullToRefresh.isRefreshing = false
+    }
+
+    override fun onNewsFound(news: MutableList<News>){
+        progressCircleVisibilityOff()
+        if (pageIndex == 1){
+            news.addAll(news)   // 4    This hardcoded expanded news list is made exclusively
+            news.addAll(news)   // 8    to fully test the proper working of the paging and
+            news.addAll(news)   // 16   update functionalities, given the limited JSon database
+            news.addAll(news)   // 32
+            newsListLayoutManager = LinearLayoutManager(context)
+            newsList.layoutManager = newsListLayoutManager
+            newsListAdapter = HomeNewsAdapter(context!!.getSharedPreferences(BaseConfiguration.SHARED_PREFERENCES_NAME,0),news, context!!)
+            newsList.adapter = newsListAdapter
+            newsListAdapter.notifyDataSetChanged()
+            fab.attachToRecyclerView(newsList)
+        } else {
+            newsListAdapter.addNews(news)
+            newsListAdapter.notifyItemRangeInserted((pageIndex-1)*newsPerPage+31, newsPerPage)
+        }
+
+        ++pageIndex
+    }
+
+    override fun onCallFailed() {
+        Toast.makeText(activity?.applicationContext, R.string.login_error_json_connection, Toast.LENGTH_LONG).show()
+        progressCircleVisibilityOff()
+    }
+
+    override fun onCallRequested() {
+        progressCircleVisibilityOn()
+    }
+
+    override fun onNoNewsAvailable(){
+        isLastPage = true
+        Toast.makeText(activity?.applicationContext, R.string.login_error_news_update, Toast.LENGTH_LONG).show()
+        progressCircleVisibilityOff()
+    }
+
+    override fun progressCircleVisibilityOn() {
+        isLoading = true
+        vNewsProgressCircle.visibility = View.VISIBLE
+    }
+
+    override fun progressCircleVisibilityOff() {
+        isLoading = false
+        vNewsProgressCircle.visibility = View.GONE
     }
 
 }
