@@ -23,8 +23,6 @@ class HomeNewsAdapter @Inject constructor(private val sharedPreferences: SharedP
 
     companion object {
         private const val userIdKey = "UserId"
-        private const val simpleDateFormatPattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        private val simpleDateFormat = SimpleDateFormat(simpleDateFormatPattern)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeNewsViewHolder {
@@ -37,6 +35,8 @@ class HomeNewsAdapter @Inject constructor(private val sharedPreferences: SharedP
 
     override fun onBindViewHolder(holder: HomeNewsViewHolder, position: Int) {
         val prettyTime = PrettyTime()
+        val simpleDateFormatPattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        val simpleDateFormat = SimpleDateFormat(simpleDateFormatPattern)
 
         holder.newsTitle.text = newsList[position].title
 
